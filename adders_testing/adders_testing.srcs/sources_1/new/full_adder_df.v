@@ -1,0 +1,44 @@
+`timescale 1ns / 1ps
+//////////////////////////////////////////////////////////////////////////////////
+// Company: 
+// Engineer: 
+// 
+// Create Date: 07/10/2025 03:18:05 PM
+// Design Name: 
+// Module Name: full_adder_df
+// Project Name: 
+// Target Devices: 
+// Tool Versions: 
+// Description: 
+// 
+// Dependencies: 
+// 
+// Revision:
+// Revision 0.01 - File Created
+// Additional Comments:
+// 
+//////////////////////////////////////////////////////////////////////////////////
+
+
+module full_adder_df(
+    input x, y, c_in,
+    output s, c_out
+    );
+    wire c1, s1;
+    
+    half_adder_df HA0 (
+        .x(x),
+        .y(y),
+        .c(c1),
+        .s(s1)    
+    );
+    half_adder_df HA1 (
+        .x(c_in),
+        .y(s1),
+        .c(c2),
+        .s(s)    
+    );
+    
+    assign c_out = c1 | c2; 
+    
+endmodule
