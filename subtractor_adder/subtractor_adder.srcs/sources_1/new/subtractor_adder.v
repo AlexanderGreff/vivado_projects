@@ -5,7 +5,7 @@
 // 
 // Create Date: 07/15/2025 04:02:32 PM
 // Design Name: 
-// Module Name: subtractor_adder_nbit
+// Module Name: subtractor_adder
 // Project Name: 
 // Target Devices: 
 // Tool Versions: 
@@ -20,13 +20,14 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module subtractor_adder_nbit
+module subtractor_adder
     #(parameter n = 4)
     (
     input [n-1:0] x,y,
     input add_n, //_n means that the add controller is asserted when the control bit is zero
     output [n-1:0] s,
-    output c_out
+    output c_out,
+    output overflow
     );
 
     wire [n-1:0] XORed_y;
@@ -48,5 +49,6 @@ module subtractor_adder_nbit
         .c_out(c_out)
     );
 
+    assign overflow = (x[n - 1] & XORed_y[n - 1] & ~s[n - 1] | (~x[n - 1] & ~XORed_y[n - 1] & s[n - 1]));
 
 endmodule
