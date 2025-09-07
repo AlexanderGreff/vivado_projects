@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GenRun Id="impl_1" LaunchPart="xc7s50csga324-1" LaunchTime="1757210600">
+<GenRun Id="impl_1" LaunchPart="xc7s50csga324-1" LaunchTime="1757280307">
   <File Type="PA-TCL" Name="Processor.tcl"/>
   <File Type="REPORTS-TCL" Name="Processor_reports.tcl"/>
   <File Type="INIT-TIMING" Name="Processor_timing_summary_init.rpt"/>
@@ -192,10 +192,10 @@
   </FileSet>
   <FileSet Name="constrs_in" Type="Constrs" RelSrcDir="$PSRCDIR/constrs_1" RelGenDir="$PGENDIR/constrs_1">
     <Filter Type="Constrs"/>
-    <File Path="$PSRCDIR/constrs_1/imports/Downloads/board_constraints_final.xdc">
+    <File Path="$PSRCDIR/constrs_1/imports/Downloads/Urbana_fixed_processor_chatgpt.xdc">
       <FileInfo>
-        <Attr Name="ImportPath" Val="$PPRDIR/../../Downloads/board_constraints_final.xdc"/>
-        <Attr Name="ImportTime" Val="1757210572"/>
+        <Attr Name="ImportPath" Val="$PPRDIR/../../Downloads/Urbana_fixed_processor_chatgpt.xdc"/>
+        <Attr Name="ImportTime" Val="1757280273"/>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>
       </FileInfo>
@@ -219,9 +219,7 @@
     </Config>
   </FileSet>
   <Strategy Version="1" Minor="2">
-    <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2025">
-      <Desc>Default settings for Implementation.</Desc>
-    </StratHandle>
+    <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2025"/>
     <Step Id="init_design"/>
     <Step Id="opt_design"/>
     <Step Id="power_opt_design"/>

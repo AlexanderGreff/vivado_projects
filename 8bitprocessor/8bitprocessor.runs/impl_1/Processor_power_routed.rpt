@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
 -------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2025.1 (win64) Build 6140274 Thu May 22 00:12:29 MDT 2025
-| Date             : Sat Sep  6 21:04:48 2025
+| Date             : Sun Sep  7 16:26:30 2025
 | Host             : alexander-LT running 64-bit major release  (build 9200)
 | Command          : report_power -file Processor_power_routed.rpt -pb Processor_power_summary_routed.pb -rpx Processor_power_routed.rpx
 | Design           : Processor
@@ -123,11 +123,11 @@ Table of Contents
 2.2 Clock Constraints
 ---------------------
 
-+---------+--------+-----------------+
-| Clock   | Domain | Constraint (ns) |
-+---------+--------+-----------------+
-| sys_clk | Clk    |            10.0 |
-+---------+--------+-----------------+
++----------------+--------+-----------------+
+| Clock          | Domain | Constraint (ns) |
++----------------+--------+-----------------+
+| sys_clk_100MHz | Clk    |            10.0 |
++----------------+--------+-----------------+
 
 
 3. Detailed Reports

@@ -1,6 +1,6 @@
 -------------------------------------
 | Tool Version : Vivado v.2025.1
-| Date         : Sat Sep  6 21:04:25 2025
+| Date         : Sun Sep  7 16:26:09 2025
 | Host         : alexander-LT
 | Design       : design_1
 | Device       : xc7s50-csga324-1--

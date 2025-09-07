@@ -58,10 +58,7 @@ if {$::dispatch::connected} {
 OPTRACE "synth_1" START { ROLLUP_AUTO }
 set_param chipscope.maxJobs 2
 set_param general.usePosixSpawnForFork 1
-set_param synth.incrementalSynthesisCache C:/Users/alexa/AppData/Roaming/Xilinx/Vivado/.Xil/Vivado-27536-alexander-LT/incrSyn
-set_param checkpoint.writeSynthRtdsInDcp 1
-set_msg_config -id {Synth 8-256} -limit 10000
-set_msg_config -id {Synth 8-638} -limit 10000
+set_param xicom.use_bs_reader 1
 OPTRACE "Creating in-memory project" START { }
 create_project -in_memory -part xc7s50csga324-1
 
@@ -95,8 +92,8 @@ OPTRACE "Adding files" END { }
 foreach dcp [get_files -quiet -all -filter file_type=="Design\ Checkpoint"] {
   set_property used_in_implementation false $dcp
 }
-read_xdc C:/Users/alexa/vivado_projects/8bitprocessor/8bitprocessor.srcs/constrs_1/imports/Downloads/board_constraints_final.xdc
-set_property used_in_implementation false [get_files C:/Users/alexa/vivado_projects/8bitprocessor/8bitprocessor.srcs/constrs_1/imports/Downloads/board_constraints_final.xdc]
+read_xdc C:/Users/alexa/vivado_projects/8bitprocessor/8bitprocessor.srcs/constrs_1/imports/Downloads/Urbana_fixed_processor_chatgpt.xdc
+set_property used_in_implementation false [get_files C:/Users/alexa/vivado_projects/8bitprocessor/8bitprocessor.srcs/constrs_1/imports/Downloads/Urbana_fixed_processor_chatgpt.xdc]
 
 set_param ips.enableIPCacheLiteLoad 1
 

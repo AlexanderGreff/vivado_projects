@@ -3,8 +3,8 @@
 # SW Build 6140274 on Thu May 22 00:12:29 MDT 2025
 # IP Build 6138677 on Thu May 22 03:10:11 MDT 2025
 # SharedData Build 6139179 on Tue May 20 17:58:58 MDT 2025
-# Start of session at: Sat Sep  6 21:03:22 2025
-# Process ID         : 15768
+# Start of session at: Sun Sep  7 16:25:08 2025
+# Process ID         : 3604
 # Current directory  : C:/Users/alexa/vivado_projects/8bitprocessor/8bitprocessor.runs/synth_1
 # Command line       : vivado.exe -log Processor.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source Processor.tcl
 # Log file           : C:/Users/alexa/vivado_projects/8bitprocessor/8bitprocessor.runs/synth_1/Processor.vds
@@ -17,8 +17,8 @@
 # CPU Physical cores : 4
 # CPU Logical cores  : 8
 # Host memory        : 16913 MB
-# Swap memory        : 4778 MB
-# Total Virtual      : 21691 MB
-# Available Virtual  : 4276 MB
+# Swap memory        : 3242 MB
+# Total Virtual      : 20156 MB
+# Available Virtual  : 2263 MB
 #-----------------------------------------------------------
 source Processor.tcl -notrace

@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
 ---------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2025.1 (win64) Build 6140274 Thu May 22 00:12:29 MDT 2025
-| Date         : Sat Sep  6 21:04:26 2025
+| Date         : Sun Sep  7 16:26:10 2025
 | Host         : alexander-LT running 64-bit major release  (build 9200)
 | Command      : report_control_sets -verbose -file Processor_control_sets_placed.rpt
 | Design       : Processor
@@ -58,12 +58,12 @@ Table of Contents
 +--------------+-----------------------+------------------------+-----------------+--------------+
 | Clock Enable | Synchronous Set/Reset | Asynchronous Set/Reset | Total Registers | Total Slices |
 +--------------+-----------------------+------------------------+-----------------+--------------+
-| No           | No                    | No                     |              51 |           28 |
+| No           | No                    | No                     |              51 |           24 |
 | No           | No                    | Yes                    |               0 |            0 |
 | No           | Yes                   | No                     |              17 |            5 |
 | Yes          | No                    | No                     |               0 |            0 |
 | Yes          | No                    | Yes                    |               0 |            0 |
-| Yes          | Yes                   | No                     |             314 |           79 |
+| Yes          | Yes                   | No                     |             314 |           78 |
 +--------------+-----------------------+------------------------+-----------------+--------------+
 
 
@@ -73,14 +73,7 @@ Table of Contents
 +----------------+-----------------------------------------------+--------------------------------------+------------------+----------------+--------------+
 |  Clock Signal  |                 Enable Signal                 |           Set/Reset Signal           | Slice Load Count | Bel Load Count | Bels / Slice |
 +----------------+-----------------------------------------------+--------------------------------------+------------------+----------------+--------------+
-|  Clk_IBUF_BUFG | control_unit/FSM_onehot_curr_state[9]_i_1_n_0 | button_sync[3]/LED_OBUF[0]           |                2 |             10 |         5.00 |
-|  Clk_IBUF_BUFG | Din_sync[7]/counter[0]_i_2__4_n_0             | Din_sync[7]/counter[0]_i_1__8_n_0    |                4 |             16 |         4.00 |
-|  Clk_IBUF_BUFG | F_sync[0]/counter[0]_i_2__16_n_0              | F_sync[0]/counter[0]_i_1__7_n_0      |                4 |             16 |         4.00 |
-|  Clk_IBUF_BUFG | F_sync[1]/counter[0]_i_2__15_n_0              | F_sync[1]/counter[0]_i_1__5_n_0      |                4 |             16 |         4.00 |
-|  Clk_IBUF_BUFG | F_sync[2]/counter[0]_i_2__14_n_0              | F_sync[2]/counter[0]_i_1__6_n_0      |                4 |             16 |         4.00 |
-|  Clk_IBUF_BUFG | Din_sync[5]/counter[0]_i_2__6_n_0             | Din_sync[5]/counter[0]_i_1__10_n_0   |                4 |             16 |         4.00 |
-|  Clk_IBUF_BUFG | Din_sync[6]/counter[0]_i_2__5_n_0             | Din_sync[6]/counter[0]_i_1__9_n_0    |                4 |             16 |         4.00 |
-|  Clk_IBUF_BUFG | Din_sync[1]/counter[0]_i_2__10_n_0            | Din_sync[1]/counter[0]_i_1__14_n_0   |                4 |             16 |         4.00 |
+|  Clk_IBUF_BUFG | control_unit/FSM_onehot_curr_state[9]_i_1_n_0 | button_sync[3]/LED_OBUF[0]           |                3 |             10 |         3.33 |
 |  Clk_IBUF_BUFG | Din_sync[2]/counter[0]_i_2__9_n_0             | Din_sync[2]/counter[0]_i_1__13_n_0   |                4 |             16 |         4.00 |
 |  Clk_IBUF_BUFG | R_sync[0]/counter[0]_i_2__13_n_0              | R_sync[0]/counter[0]_i_1__3_n_0      |                4 |             16 |         4.00 |
 |  Clk_IBUF_BUFG | R_sync[1]/counter[0]_i_2__12_n_0              | R_sync[1]/counter[0]_i_1__4_n_0      |                4 |             16 |         4.00 |
@@ -90,11 +83,18 @@ Table of Contents
 |  Clk_IBUF_BUFG | button_sync[3]/sel                            | button_sync[3]/counter[0]_i_1__2_n_0 |                4 |             16 |         4.00 |
 |  Clk_IBUF_BUFG | Din_sync[3]/counter[0]_i_2__8_n_0             | Din_sync[3]/counter[0]_i_1__12_n_0   |                4 |             16 |         4.00 |
 |  Clk_IBUF_BUFG | Din_sync[4]/counter[0]_i_2__7_n_0             | Din_sync[4]/counter[0]_i_1__11_n_0   |                4 |             16 |         4.00 |
-|  Clk_IBUF_BUFG | control_unit/q_reg[0]                         | button_sync[3]/LED_OBUF[0]           |                6 |             16 |         2.67 |
-|  Clk_IBUF_BUFG | control_unit/E[0]                             | button_sync[3]/LED_OBUF[0]           |                3 |             16 |         5.33 |
+|  Clk_IBUF_BUFG | control_unit/q_reg[0]                         | button_sync[3]/LED_OBUF[0]           |                5 |             16 |         3.20 |
+|  Clk_IBUF_BUFG | control_unit/E[0]                             | button_sync[3]/LED_OBUF[0]           |                2 |             16 |         8.00 |
 |  Clk_IBUF_BUFG | Din_sync[0]/counter[0]_i_2__11_n_0            | Din_sync[0]/counter[0]_i_1__15_n_0   |                4 |             16 |         4.00 |
+|  Clk_IBUF_BUFG | Din_sync[1]/counter[0]_i_2__10_n_0            | Din_sync[1]/counter[0]_i_1__14_n_0   |                4 |             16 |         4.00 |
+|  Clk_IBUF_BUFG | Din_sync[5]/counter[0]_i_2__6_n_0             | Din_sync[5]/counter[0]_i_1__10_n_0   |                4 |             16 |         4.00 |
+|  Clk_IBUF_BUFG | Din_sync[6]/counter[0]_i_2__5_n_0             | Din_sync[6]/counter[0]_i_1__9_n_0    |                4 |             16 |         4.00 |
+|  Clk_IBUF_BUFG | Din_sync[7]/counter[0]_i_2__4_n_0             | Din_sync[7]/counter[0]_i_1__8_n_0    |                4 |             16 |         4.00 |
+|  Clk_IBUF_BUFG | F_sync[0]/counter[0]_i_2__16_n_0              | F_sync[0]/counter[0]_i_1__7_n_0      |                4 |             16 |         4.00 |
+|  Clk_IBUF_BUFG | F_sync[1]/counter[0]_i_2__15_n_0              | F_sync[1]/counter[0]_i_1__5_n_0      |                4 |             16 |         4.00 |
+|  Clk_IBUF_BUFG | F_sync[2]/counter[0]_i_2__14_n_0              | F_sync[2]/counter[0]_i_1__6_n_0      |                4 |             16 |         4.00 |
 |  Clk_IBUF_BUFG |                                               | button_sync[3]/LED_OBUF[0]           |                5 |             17 |         3.40 |
-|  Clk_IBUF_BUFG |                                               |                                      |               28 |             51 |         1.82 |
+|  Clk_IBUF_BUFG |                                               |                                      |               24 |             51 |         2.12 |
 +----------------+-----------------------------------------------+--------------------------------------+------------------+----------------+--------------+
 
 
