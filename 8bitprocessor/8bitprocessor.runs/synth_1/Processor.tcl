@@ -92,8 +92,8 @@ OPTRACE "Adding files" END { }
 foreach dcp [get_files -quiet -all -filter file_type=="Design\ Checkpoint"] {
   set_property used_in_implementation false $dcp
 }
-read_xdc C:/Users/alexa/vivado_projects/8bitprocessor/8bitprocessor.srcs/constrs_1/imports/Downloads/Urbana_fixed_processor_chatgpt.xdc
-set_property used_in_implementation false [get_files C:/Users/alexa/vivado_projects/8bitprocessor/8bitprocessor.srcs/constrs_1/imports/Downloads/Urbana_fixed_processor_chatgpt.xdc]
+read_xdc C:/Users/alexa/vivado_projects/8bitprocessor/8bitprocessor.srcs/constrs_1/imports/Downloads/Working_Current.xdc
+set_property used_in_implementation false [get_files C:/Users/alexa/vivado_projects/8bitprocessor/8bitprocessor.srcs/constrs_1/imports/Downloads/Working_Current.xdc]
 
 set_param ips.enableIPCacheLiteLoad 1
 

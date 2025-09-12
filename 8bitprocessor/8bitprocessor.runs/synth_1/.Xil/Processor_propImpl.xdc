@@ -1,4 +1,4 @@
-set_property SRC_FILE_INFO {cfile:C:/Users/alexa/vivado_projects/8bitprocessor/8bitprocessor.srcs/constrs_1/imports/Downloads/Urbana_fixed_processor_chatgpt.xdc rfile:../../../8bitprocessor.srcs/constrs_1/imports/Downloads/Urbana_fixed_processor_chatgpt.xdc id:1} [current_design]
+set_property SRC_FILE_INFO {cfile:C:/Users/alexa/vivado_projects/8bitprocessor/8bitprocessor.srcs/constrs_1/imports/Downloads/Working_Current.xdc rfile:../../../8bitprocessor.srcs/constrs_1/imports/Downloads/Working_Current.xdc id:1} [current_design]
 set_property src_info {type:XDC file:1 line:4 export:INPUT save:INPUT read:READ} [current_design]
 set_property -dict { PACKAGE_PIN N15 IOSTANDARD LVCMOS33 } [get_ports {Clk}]
 set_property src_info {type:XDC file:1 line:16 export:INPUT save:INPUT read:READ} [current_design]

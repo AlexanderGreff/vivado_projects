@@ -168,15 +168,14 @@
     </FileSet>
     <FileSet Name="constrs_1" Type="Constrs" RelSrcDir="$PSRCDIR/constrs_1" RelGenDir="$PGENDIR/constrs_1">
       <Filter Type="Constrs"/>
-      <File Path="$PSRCDIR/constrs_1/imports/Downloads/Urbana_fixed_processor_chatgpt.xdc">
+      <File Path="$PSRCDIR/constrs_1/imports/Downloads/Working_Current.xdc">
         <FileInfo>
-          <Attr Name="ImportPath" Val="$PPRDIR/../../Downloads/Urbana_fixed_processor_chatgpt.xdc"/>
-          <Attr Name="ImportTime" Val="1757280273"/>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="implementation"/>
         </FileInfo>
       </File>
       <Config>
+        <Option Name="TargetConstrsFile" Val="$PSRCDIR/constrs_1/imports/Downloads/Working_Current.xdc"/>
         <Option Name="ConstrsType" Val="XDC"/>
       </Config>
     </FileSet>
