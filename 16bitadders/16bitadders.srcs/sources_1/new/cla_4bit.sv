@@ -30,6 +30,8 @@ module cla_4bit
 	output logic  [3:0] s_out
     );
     
+   
+    
 logic  [3:0] p;
 logic  [3:0] g;
 logic [3:0] cbit;
@@ -42,7 +44,7 @@ begin
 end	
 
     assign cbit[0] = cin;
-    assign cbit[1] = g[0] | (p[0] & g[0]);
+    assign cbit[1] = g[0] | (p[0] & cbit[0]);
     assign cbit[2] = g[1] | (p[1] & g[0]) | (p[1] & p[0] & cbit[0]);
     assign cbit[3] = g[2] | (p[2] & g[1]) | (p[2] & p[1] & g[0]) | (p[2] & p[1] & p[0] & cbit[0]);
 
