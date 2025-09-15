@@ -91,6 +91,7 @@ set_property -dict {PACKAGE_PIN B11 IOSTANDARD LVCMOS33} [get_ports {LED[1]}]
 set_property -dict {PACKAGE_PIN C10 IOSTANDARD LVCMOS33} [get_ports {LED[2]}]
 set_property -dict {PACKAGE_PIN A11 IOSTANDARD LVCMOS33} [get_ports {LED[3]}]
 
+
 create_debug_core u_ila_0 ila
 set_property ALL_PROBE_SAME_MU true [get_debug_cores u_ila_0]
 set_property ALL_PROBE_SAME_MU_CNT 1 [get_debug_cores u_ila_0]
@@ -104,11 +105,11 @@ set_property port_width 1 [get_debug_ports u_ila_0/clk]
 connect_debug_port u_ila_0/clk [get_nets [list Clk_IBUF_BUFG]]
 set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe0]
 set_property port_width 8 [get_debug_ports u_ila_0/probe0]
-connect_debug_port u_ila_0/probe0 [get_nets [list {Bval_OBUF[0]} {Bval_OBUF[1]} {Bval_OBUF[2]} {Bval_OBUF[3]} {Bval_OBUF[4]} {Bval_OBUF[5]} {Bval_OBUF[6]} {Bval_OBUF[7]}]]
+connect_debug_port u_ila_0/probe0 [get_nets [list {Aval_OBUF[0]} {Aval_OBUF[1]} {Aval_OBUF[2]} {Aval_OBUF[3]} {Aval_OBUF[4]} {Aval_OBUF[5]} {Aval_OBUF[6]} {Aval_OBUF[7]}]]
 create_debug_port u_ila_0 probe
 set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe1]
 set_property port_width 8 [get_debug_ports u_ila_0/probe1]
-connect_debug_port u_ila_0/probe1 [get_nets [list {Aval_OBUF[0]} {Aval_OBUF[1]} {Aval_OBUF[2]} {Aval_OBUF[3]} {Aval_OBUF[4]} {Aval_OBUF[5]} {Aval_OBUF[6]} {Aval_OBUF[7]}]]
+connect_debug_port u_ila_0/probe1 [get_nets [list {Bval_OBUF[0]} {Bval_OBUF[1]} {Bval_OBUF[2]} {Bval_OBUF[3]} {Bval_OBUF[4]} {Bval_OBUF[5]} {Bval_OBUF[6]} {Bval_OBUF[7]}]]
 create_debug_port u_ila_0 probe
 set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe2]
 set_property port_width 1 [get_debug_ports u_ila_0/probe2]
