@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="testbench8_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="glbl" />
+            <top_module name="testbench8" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="0 ps"></ZoomStartTime>
+      <ZoomEndTime time="12 ps"></ZoomEndTime>
+      <Cursor1Time time="0 ps"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="291"></NameColumnWidth>
+      <ValueColumnWidth column_width="132"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="10" />
+   <wvobject fp_name="/testbench8/clk" type="logic">
+      <obj_property name="ElementShortName">clk</obj_property>
+      <obj_property name="ObjectShortName">clk</obj_property>
+   </wvobject>
+   <wvobject fp_name="/testbench8/reset" type="logic">
+      <obj_property name="ElementShortName">reset</obj_property>
+      <obj_property name="ObjectShortName">reset</obj_property>
+   </wvobject>
+   <wvobject fp_name="/testbench8/run_i" type="logic">
+      <obj_property name="ElementShortName">run_i</obj_property>
+      <obj_property name="ObjectShortName">run_i</obj_property>
+   </wvobject>
+   <wvobject fp_name="/testbench8/sw_i" type="array">
+      <obj_property name="ElementShortName">sw_i[15:0]</obj_property>
+      <obj_property name="ObjectShortName">sw_i[15:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/testbench8/sign_led" type="logic">
+      <obj_property name="ElementShortName">sign_led</obj_property>
+      <obj_property name="ObjectShortName">sign_led</obj_property>
+   </wvobject>
+   <wvobject fp_name="/testbench8/hex_seg_a" type="array">
+      <obj_property name="ElementShortName">hex_seg_a[7:0]</obj_property>
+      <obj_property name="ObjectShortName">hex_seg_a[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/testbench8/hex_seg_b" type="array">
+      <obj_property name="ElementShortName">hex_seg_b[7:0]</obj_property>
+      <obj_property name="ObjectShortName">hex_seg_b[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/testbench8/hex_grid_a" type="array">
+      <obj_property name="ElementShortName">hex_grid_a[3:0]</obj_property>
+      <obj_property name="ObjectShortName">hex_grid_a[3:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/testbench8/hex_grid_b" type="array">
+      <obj_property name="ElementShortName">hex_grid_b[3:0]</obj_property>
+      <obj_property name="ObjectShortName">hex_grid_b[3:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/testbench8/addertop0/reg_unit/data_q" type="array">
+      <obj_property name="ElementShortName">data_q[16:0]</obj_property>
+      <obj_property name="ObjectShortName">data_q[16:0]</obj_property>
+   </wvobject>
+</wave_config>

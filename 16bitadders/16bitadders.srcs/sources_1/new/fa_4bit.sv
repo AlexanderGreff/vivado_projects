@@ -31,7 +31,7 @@ module fa_4bit
     );
     
   
-  logic [3:0] c;
+  logic [4:0] c;
   assign c[0] = cin;
   
 generate   
@@ -49,7 +49,7 @@ generate
     end
 endgenerate
    
-    assign cout = c[3];
+    assign cout = c[4];
     
     
 endmodule
