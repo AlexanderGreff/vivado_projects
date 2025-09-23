@@ -97,6 +97,8 @@ proc step_failed { step } {
 OPTRACE "impl_1" END { }
 }
 
+set_msg_config -id {Synth 8-256} -limit 10000
+set_msg_config -id {Synth 8-638} -limit 10000
 
 OPTRACE "impl_1" START { ROLLUP_1 }
 OPTRACE "Phase: Init Design" START { ROLLUP_AUTO }
@@ -106,6 +108,8 @@ set rc [catch {
   create_msg_db init_design.pb
   set_param chipscope.maxJobs 2
   set_param general.usePosixSpawnForFork 1
+  set_param synth.incrementalSynthesisCache C:/Users/alexa/AppData/Roaming/Xilinx/Vivado/.Xil/Vivado-13944-alexander-LT/incrSyn
+  set_param checkpoint.writeSynthRtdsInDcp 1
   set_param runs.launchOptions { -jobs 8  }
   reset_param project.defaultXPMLibraries 
   open_checkpoint C:/Users/alexa/vivado_projects/8bitprocessor/8bitprocessor.runs/impl_1/Processor.dcp

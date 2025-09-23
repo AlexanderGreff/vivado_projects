@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
 -------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2025.1 (win64) Build 6140274 Thu May 22 00:12:29 MDT 2025
-| Date             : Wed Sep 10 21:57:44 2025
+| Date             : Mon Sep 22 21:22:30 2025
 | Host             : alexander-LT running 64-bit major release  (build 9200)
 | Command          : report_power -file Processor_power_routed.rpt -pb Processor_power_summary_routed.pb -rpx Processor_power_routed.rpx
 | Design           : Processor
@@ -54,7 +54,7 @@ Table of Contents
 +--------------------------+-----------+----------+-----------+-----------------+
 | Clocks                   |     0.012 |        4 |       --- |             --- |
 | Slice Logic              |     0.001 |     4608 |       --- |             --- |
-|   LUT as Logic           |    <0.001 |     1277 |     32600 |            3.92 |
+|   LUT as Logic           |    <0.001 |     1282 |     32600 |            3.93 |
 |   CARRY4                 |    <0.001 |      114 |      8150 |            1.40 |
 |   Register               |    <0.001 |     2376 |     65200 |            3.64 |
 |   LUT as Shift Register  |    <0.001 |       79 |      9600 |            0.82 |
@@ -75,7 +75,7 @@ Table of Contents
 +-----------+-------------+-----------+-------------+------------+-------------+-------------+------------+
 | Source    | Voltage (V) | Total (A) | Dynamic (A) | Static (A) | Powerup (A) | Budget (A)  | Margin (A) |
 +-----------+-------------+-----------+-------------+------------+-------------+-------------+------------+
-| Vccint    |       1.000 |     0.028 |       0.017 |      0.010 |       NA    | Unspecified | NA         |
+| Vccint    |       1.000 |     0.027 |       0.017 |      0.010 |       NA    | Unspecified | NA         |
 | Vccaux    |       1.800 |     0.013 |       0.000 |      0.013 |       NA    | Unspecified | NA         |
 | Vcco33    |       3.300 |     0.002 |       0.001 |      0.001 |       NA    | Unspecified | NA         |
 | Vcco25    |       2.500 |     0.002 |       0.001 |      0.001 |       NA    | Unspecified | NA         |
@@ -147,9 +147,9 @@ Table of Contents
 |   dbg_hub                |     0.003 |
 |     inst                 |     0.003 |
 |       BSCANID.u_xsdbm_id |     0.003 |
-|   u_ila_0                |     0.011 |
-|     inst                 |     0.011 |
-|       ila_core_inst      |     0.011 |
+|   u_ila_0                |     0.010 |
+|     inst                 |     0.010 |
+|       ila_core_inst      |     0.010 |
 +--------------------------+-----------+
 
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GenRun Id="impl_1" LaunchPart="xc7s50csga324-1" LaunchTime="1757559291">
+<GenRun Id="impl_1" LaunchPart="xc7s50csga324-1" LaunchTime="1758593982">
   <File Type="REPORTS-TCL" Name="Processor_reports.tcl"/>
   <File Type="ROUTE-PWR-SUM" Name="Processor_power_summary_routed.pb"/>
   <File Type="BITSTR-MMI" Name="Processor.mmi"/>
@@ -147,14 +147,6 @@
     </File>
     <File Path="$PPRDIR/design_source/Processor.sv">
       <FileInfo>
-        <Attr Name="UsedIn" Val="synthesis"/>
-        <Attr Name="UsedIn" Val="implementation"/>
-        <Attr Name="UsedIn" Val="simulation"/>
-      </FileInfo>
-    </File>
-    <File Path="$PPRDIR/design_source/Reg_4.sv">
-      <FileInfo>
-        <Attr Name="AutoDisabled" Val="1"/>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>
         <Attr Name="UsedIn" Val="simulation"/>
