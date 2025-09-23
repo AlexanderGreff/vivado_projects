@@ -24,6 +24,7 @@ module control_8(
     input  logic Clk, 
 	input  logic Reset_LoadB_ClearA,
 	input  logic Run,
+    input  logic B_out,
 
     output logic Add,
     output logic Sub,
@@ -31,7 +32,6 @@ module control_8(
 	output logic ClrXA_Ld_B
     );
     
-    logic op_type;
     logic counter;
     
 // Declare signals curr_state, next_state of type enum
@@ -39,14 +39,8 @@ module control_8(
 // Note that the length implies a max of 8 states, so you will need to bump this up for 8-bits
 	enum logic [3:0] {
 		s_start, 
-		s_count0, 
-		s_count1, 
-		s_count2, 
-		s_count3, 
-		s_count4,
-		s_count5,
-		s_count6,
-		s_count7,
+		s_shift,
+		s_shift_add,
 		s_done
 	} curr_state, next_state; 
 
@@ -64,18 +58,12 @@ module control_8(
 			begin
 				Shift_En = 1'b0;
 			end
-
-			default:  //default case, can also have default assignments for Ld_A and Ld_B before case
-			begin 
-			  ClrXA_Ld_B  = 1'b0;
-			end
 		endcase
 	end
 
 // Assign outputs based on state
 	always_comb
 	begin
-
 		next_state  = curr_state;	//required because I haven't enumerated all possibilities below. Synthesis would infer latch without this
 		unique case (curr_state) 
 
@@ -83,26 +71,81 @@ module control_8(
 			begin
 				if (Run) 
 				begin
-					next_state = s_count0;
-				end
+					if (B_out == 1'b1)
+					begin
+					   next_state = s_shift_add;
+					end
+					
+                    else 
+                    begin
+                       next_state = s_shift;
+                    end
+                 end
 			end
-
-			s_count0 :    next_state = s_count1;
-			s_count1 :    next_state = s_count2;
-			s_count2 :    next_state = s_count3;
-			s_count3 :    next_state = s_count4;
-			s_count4 :    next_state = s_count5;
-			s_count5 :    next_state = s_count6;
-			s_count6 :    next_state = s_count7;
-			s_count7 :    next_state = s_done;
-
-			s_done :    
+			
+			 s_shift :
+			 begin
+			     Shift_En = 1'b1;
+			     counter = counter + 1;
+			     if (counter != 7)
+			     begin
+                     if (B_out == 1'b1)
+                     begin
+                         next_state = s_shift_add;
+                     end
+                     
+                     else
+                     begin
+                         next_state = s_shift;
+                     end    
+                 end
+                 
+                 else
+                 begin
+                    next_state = s_done;
+                 end
+			 end
+			
+			 s_shift_add :
+			 begin
+			     Add = 1'b1;
+			     Shift_En = 1'b1;
+			     counter = counter + 1;
+			     if (counter != 7)
+			     begin
+                     if (B_out == 1'b1)
+                     begin
+                         next_state = s_shift_add;
+                     end
+                     
+                     else
+                     begin
+                         next_state = s_shift;
+                     end    
+                 end
+                 
+                 else
+                 begin
+                    next_state = s_done;
+                 end
+			 end
+			 
+			s_done:
 			begin
-				if (~Run) 
-				begin
-					next_state = s_start;
-				end
+			     if (B_out == 1)
+			     begin
+			         Sub = 1'b1;
+			         Shift_En = 1'b1;
+			         next_state = s_start;
+			     end
+			     
+			     else
+			     begin
+			         Shift_En = 1'b1;
+			         next_state = s_start;
+			     end
 			end
+
 					
 		endcase
 	end
