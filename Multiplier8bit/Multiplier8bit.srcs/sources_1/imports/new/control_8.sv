@@ -32,7 +32,8 @@ module control_8(
 	output logic ClrXA_Ld_B
     );
     
-    logic counter;
+    logic [2:0] curr_counter;
+    logic [2:0] next_counter;
     
 // Declare signals curr_state, next_state of type enum
 // with enum values of s_start, s_count0, ..., s_done as the state values
@@ -40,129 +41,71 @@ module control_8(
 	enum logic [3:0] {
 		s_start, 
 		s_shift,
-		s_shift_add,
+		s_op,
 		s_done
 	} curr_state, next_state; 
 
-	always_comb
-	begin
-	// Assign outputs based on 'state'
-		unique case (curr_state) 
-			s_start: 
-			begin
-			    ClrXA_Ld_B = Reset_LoadB_ClearA;
-				Shift_En = 1'b0;
-			end
-
-			s_done: 
-			begin
-				Shift_En = 1'b0;
-			end
-		endcase
-	end
-
-// Assign outputs based on state
-	always_comb
-	begin
-		next_state  = curr_state;	//required because I haven't enumerated all possibilities below. Synthesis would infer latch without this
-		unique case (curr_state) 
-
-			s_start :    
-			begin
-				if (Run) 
-				begin
-					if (B_out == 1'b1)
-					begin
-					   next_state = s_shift_add;
-					end
-					
-                    else 
-                    begin
-                       next_state = s_shift;
-                    end
-                 end
-			end
-			
-			 s_shift :
-			 begin
-			     Shift_En = 1'b1;
-			     counter = counter + 1;
-			     if (counter != 7)
-			     begin
-                     if (B_out == 1'b1)
-                     begin
-                         next_state = s_shift_add;
-                     end
-                     
-                     else
-                     begin
-                         next_state = s_shift;
-                     end    
-                 end
-                 
-                 else
-                 begin
-                    next_state = s_done;
-                 end
-			 end
-			
-			 s_shift_add :
-			 begin
-			     Add = 1'b1;
-			     Shift_En = 1'b1;
-			     counter = counter + 1;
-			     if (counter != 7)
-			     begin
-                     if (B_out == 1'b1)
-                     begin
-                         next_state = s_shift_add;
-                     end
-                     
-                     else
-                     begin
-                         next_state = s_shift;
-                     end    
-                 end
-                 
-                 else
-                 begin
-                    next_state = s_done;
-                 end
-			 end
-			 
-			s_done:
-			begin
-			     if (B_out == 1)
-			     begin
-			         Sub = 1'b1;
-			         Shift_En = 1'b1;
-			         next_state = s_start;
-			     end
-			     
-			     else
-			     begin
-			         Shift_En = 1'b1;
-			         next_state = s_start;
-			     end
-			end
-
-					
-		endcase
-	end
-
-
-
-	//updates flip flop, current state is the only one
-	always_ff @(posedge Clk)  
-	begin
-		if (Reset_LoadB_ClearA)
-		begin
-			curr_state <= s_start;
-		end
-		else 
-		begin
-			curr_state <= next_state;
-		end
-	end
-
-endmodule
+    always_ff @(posedge Clk) 
+    begin
+      if (Reset_LoadB_ClearA) 
+      begin
+        curr_state   <= s_start;
+        curr_counter <= 3'd0;
+      end
+      
+      else 
+      begin
+        curr_state   <= next_state;
+        curr_counter <= next_counter;   
+      end
+    end
+    
+    always_comb begin
+      Add=0;
+       Sub=0;
+       Shift_En=0;
+      ClrXA_Ld_B = Reset_LoadB_ClearA;   
+      next_state   = curr_state;          
+      next_counter = curr_counter;
+    
+      unique case (curr_state)
+      s_start: 
+      begin
+          if (Run) 
+          begin
+            next_counter = 3'd0;
+            next_state   = s_op;
+          end
+        end
+    
+        s_op: 
+        begin
+          if (curr_counter == 3'd7)
+          begin
+                Sub = B_out;
+          end
+           else
+           begin
+                Add = B_out;
+           end
+          next_state = s_shift;
+        end
+    
+        s_shift:
+        begin
+          Shift_En     = 1'b1;
+          next_counter = curr_counter + 3'd1;
+          next_state   = (curr_counter == 3'd7) ? s_done : s_op;
+        end
+    
+        s_done: 
+        begin
+          if (Run) 
+          begin
+            next_counter = 3'd0;
+            next_state   = s_start;  
+          end
+        end
+      endcase
+    end
+    endmodule
