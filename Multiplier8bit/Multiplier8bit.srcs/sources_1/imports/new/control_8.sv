@@ -76,7 +76,6 @@ module control_8(
       begin
           if (Run) 
           begin
-          
             next_counter = 3'd0;
             next_state   = s_op;
             Clr_XA = 1'b1;
@@ -107,7 +106,6 @@ module control_8(
         begin
           if (!Run) 
           begin
-            next_counter = 3'd0;
             next_state   = s_start;  
           end
         end

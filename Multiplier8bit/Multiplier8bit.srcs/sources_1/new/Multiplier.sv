@@ -71,11 +71,11 @@ module Multiplier
 		.Clk        (Clk),
 		.Reset      (1'b0),
 
-		.Ld_A       (Ld_A_En | Clr_XA),
+		.Ld_A       (Ld_A_En | Clr_XA | ClrXA_LdB),
 		.Ld_B       (ClrXA_LdB),
 		.Ld_S        (Run_SH),
 		.Shift_En   (Shift_En),
-		.D_A        (Clr_XA ? 8'h00 : sum[7:0]),
+		.D_A        ((Clr_XA | ClrXA_LdB) ? 8'h00 : sum[7:0]),
 		.D_B        (Din_S),
 		.D_S        (Din_S),
 		.A_In       (X),
@@ -97,9 +97,9 @@ module Multiplier
 		.Reset          (1'b0),
 
 		.Shift_In       (X), 
-		.Load           (Ld_A_En | Clr_XA), 
+		.Load           (Ld_A_En | Clr_XA | ClrXA_LdB), 
 		.Shift_En       (Shift_En),   
-		.D              (Clr_XA ? 1'b0  : sum[8]),
+		.D              ((Clr_XA | ClrXA_LdB) ? 1'b0  : sum[8]),
 
 		.Shift_Out      (),
 		.Data_Out       (X)
