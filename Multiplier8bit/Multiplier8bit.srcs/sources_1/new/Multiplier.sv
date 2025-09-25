@@ -40,6 +40,7 @@ module Multiplier
 	logic [7:0] A; 
 	logic [7:0] B; 
 	logic [7:0] S; 
+	logic X;
 //debounce bits
 	logic [2:0] F_S;
 	logic [1:0] R_S;
@@ -53,35 +54,35 @@ module Multiplier
 	logic ctrl_add_out;
 	logic ctrl_sub_out;
 //button press in FSM
-	logic ClrXA_LdB;
 //sum from adder-subtractor
 	logic [8:0] sum;
 //shifted out bits from resgisters A,B,S
 	logic A_shift_out;
 	logic B_shift_out;
 	logic S_shift_out;
+	logic Clr_XA;
 	 
 	 
 //We can use the "assign" statement to do simple combinational logic
 	assign Aval = A;
 	assign Bval = B;
-	assign Xval = sum[8];
+	assign Xval = X;
 
 //Instantiation of modules here
     assign Ld_A_En = ctrl_add_out | ctrl_sub_out;
 
 	reg_8_unit reg_unit (
 		.Clk        (Clk),
-		.Reset      (),
+		.Reset      (1'b0),
 
-		.Ld_A       (Ld_A_En | ClrXA_Ld_B),
-		.Ld_B       (ClrXA_Ld_B),
+		.Ld_A       (Ld_A_En | Clr_XA),
+		.Ld_B       (ClrXA_LdB),
 		.Ld_S        (Run_SH),
 		.Shift_En   (Shift_En),
-		.D_A        (ClrXA_Ld_B ? 8'h00 : sum[7:0]),
+		.D_A        (Clr_XA ? 8'h00 : sum[7:0]),
 		.D_B        (Din_S),
 		.D_S        (Din_S),
-		.A_In       (sum[8]),
+		.A_In       (X),
 		.B_In       (A_shift_out),
 		.S_In(1'b0),
 		
@@ -97,21 +98,22 @@ module Multiplier
 	    reg_1 reg_X
     (
     	.Clk            (Clk), 
-		.Reset          (),
+		.Reset          (1'b0),
 
-		.Shift_In       (sum[8]), 
-		.Load           (Ld_A_En), 
+		.Shift_In       (X), 
+		.Load           (Ld_A_En | Clr_XA), 
 		.Shift_En       (Shift_En),   
-		.D              (ClrXA_Ld_B ? 1'b0  : sum[8]),
+		.D              (Clr_XA ? 1'b0  : sum[8]),
 
 		.Shift_Out      (),
-		.Data_Out       (sum[8])
+		.Data_Out       (X)
     );
                     
-    //Adder goes here
+                    
     adder_subtractor_8 add_sub
     (
     .S(S), 
+    .X_in(X),
     .A(A),
     .Sub(ctrl_sub_out),
             
@@ -128,7 +130,9 @@ module Multiplier
 		.Shift_En   (Shift_En),
 		.Add (ctrl_add_out),
 		.Sub (ctrl_sub_out),
-		.ClrXA_Ld_B (ClrXA_Ld_B)
+		.ClrXA_Ld_B (ClrXA_LdB),
+		.Clr_XA (Clr_XA)
+		
 	);
                     
  
@@ -138,7 +142,7 @@ module Multiplier
 
 HexDriver HexA (
 		.clk        (Clk),
-		.reset      (ClrXA_LdB),
+		.reset      (ClrXA_LdB_SH),
 
 		.in         ({A[7:4],A[3:0],B[7:4],B[3:0]}),
 		.hex_seg    (hex_seg),

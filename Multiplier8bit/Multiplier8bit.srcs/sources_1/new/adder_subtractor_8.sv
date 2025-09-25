@@ -24,6 +24,7 @@ module adder_subtractor_8
     (
         input logic [7:0] S, A,
         input logic Sub,
+        input logic X_in,
         
         output logic [8:0] sum
     );
@@ -53,7 +54,7 @@ endgenerate
 
 	full_adder FA9
 		(
-			.a(a8),
+			.a(X_in),
 			.b(s8),
 			.cin(c[8]),
 			.s(sum[8]),

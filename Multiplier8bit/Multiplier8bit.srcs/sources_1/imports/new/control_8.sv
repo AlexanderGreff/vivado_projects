@@ -29,11 +29,13 @@ module control_8(
     output logic Add,
     output logic Sub,
 	output logic Shift_En, 
-	output logic ClrXA_Ld_B
+	output logic ClrXA_Ld_B,
+	output logic Clr_XA
     );
     
     logic [2:0] curr_counter;
     logic [2:0] next_counter;
+    
     
 // Declare signals curr_state, next_state of type enum
 // with enum values of s_start, s_count0, ..., s_done as the state values
@@ -65,6 +67,7 @@ module control_8(
        Sub=0;
        Shift_En=0;
       ClrXA_Ld_B = Reset_LoadB_ClearA;   
+      Clr_XA = 1'b0;
       next_state   = curr_state;          
       next_counter = curr_counter;
     
@@ -73,6 +76,7 @@ module control_8(
       begin
           if (Run) 
           begin
+          
             next_counter = 3'd0;
             next_state   = s_op;
           end
