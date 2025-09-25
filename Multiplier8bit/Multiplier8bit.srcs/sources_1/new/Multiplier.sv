@@ -41,10 +41,6 @@ module Multiplier
 	logic [7:0] B; 
 	logic [7:0] S; 
 	logic X;
-//debounce bits
-	logic [2:0] F_S;
-	logic [1:0] R_S;
-//
 
 	logic Shift_En;
 	logic [7:0] Din_S;
@@ -59,8 +55,8 @@ module Multiplier
 //shifted out bits from resgisters A,B,S
 	logic A_shift_out;
 	logic B_shift_out;
-	logic S_shift_out;
 	logic Clr_XA;
+	logic ClrXA_LdB;
 	 
 	 
 //We can use the "assign" statement to do simple combinational logic

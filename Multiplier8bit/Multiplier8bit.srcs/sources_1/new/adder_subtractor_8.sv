@@ -32,7 +32,6 @@ module adder_subtractor_8
 logic a8, s8;
 logic [9 : 0] c;
 
-assign a8 = A[7];
 assign s8 = S[7] ^ Sub;
 assign c[0] = Sub;
 
