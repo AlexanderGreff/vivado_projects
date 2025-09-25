@@ -25,7 +25,6 @@ module adder_subtractor_8
         input logic [7:0] S, A,
         input logic Sub,
         
-        output logic X,
         output logic [8:0] sum
     );
     
@@ -60,8 +59,6 @@ endgenerate
 			.s(sum[8]),
 			.cout(c[9])
 		);
-	   assign X = sum[8];
-
 
 endmodule
     
