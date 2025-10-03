@@ -61,7 +61,6 @@ logic ben;
 
 assign mem_addr = mar;
 assign mem_wdata = mdr;
-assign pc_next = pc + 16'd1;
 
 // State machine, you need to fill in the code here as well
 // .* auto-infers module input/output connections which have the same name
@@ -75,13 +74,22 @@ control cpu_control (
 assign led_o = ir;
 assign hex_display_debug = ir;
 
-always_comb
-begin case(pcmux)
-    2'b00: pc_in = pc_next;
-    2'b01: pc_in = gate_mdr;
-    2'b10: pc_in = 16'b0;
-    2'b11: pc_in = 16'b0;
-    endcase
+logic [15:0] pc_in;
+always_comb 
+begin
+    pc_in = 16'h0000;
+    if (pcmux == 2'b00)
+    begin
+        pc_in = pc + 16'd1;
+//        pc = pc_in;
+    end
+    
+//begin case(pcmux)
+//    2'b00: pc_in = pc_next;
+//    2'b01: pc_in = gate_mdr;
+//    2'b10: pc_in = 16'b0;
+//    2'b11: pc_in = 16'b0;
+//    endcase
 end
 
 load_reg #(.DATA_WIDTH(16)) ir_reg (
@@ -123,12 +131,6 @@ load_reg #(.DATA_WIDTH(16)) mdr_reg (
 
     .data_q(mdr)
 );
-
-
-
-
-
-
 
 
 endmodule
