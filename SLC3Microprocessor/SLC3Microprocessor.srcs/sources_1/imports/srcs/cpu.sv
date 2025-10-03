@@ -49,7 +49,6 @@ logic gate_mdr;
 
 //selector bits for muxes
 logic [1:0] pcmux;
-logic pc_in;
 logic mio_en;
 
 logic [15:0] mar; 
@@ -77,7 +76,7 @@ assign hex_display_debug = ir;
 logic [15:0] pc_in;
 always_comb 
 begin
-    pc_in = 16'h0000;
+    pc_in = pc;
     if (pcmux == 2'b00)
     begin
         pc_in = pc + 16'd1;
