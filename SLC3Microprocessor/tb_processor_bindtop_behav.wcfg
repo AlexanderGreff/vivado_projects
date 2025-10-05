@@ -3,78 +3,78 @@
    <wave_state>
    </wave_state>
    <db_ref_list>
-      <db_ref path="testbench_fetch_behav.wdb" id="1">
+      <db_ref path="tb_processor_bindtop_behav.wdb" id="1">
          <top_modules>
             <top_module name="SLC3_TYPES" />
             <top_module name="glbl" />
-            <top_module name="testbench_fetch" />
+            <top_module name="tb_processor_bindtop" />
          </top_modules>
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="630,400 ps"></ZoomStartTime>
-      <ZoomEndTime time="630,414 ps"></ZoomEndTime>
-      <Cursor1Time time="630,401 ps"></Cursor1Time>
+      <ZoomStartTime time="526,124 ps"></ZoomStartTime>
+      <ZoomEndTime time="526,135 ps"></ZoomEndTime>
+      <Cursor1Time time="526,130 ps"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
       <NameColumnWidth column_width="291"></NameColumnWidth>
-      <ValueColumnWidth column_width="118"></ValueColumnWidth>
+      <ValueColumnWidth column_width="111"></ValueColumnWidth>
    </column_width_setting>
    <WVObjectSize size="14" />
-   <wvobject fp_name="/testbench_fetch/clk" type="logic">
+   <wvobject fp_name="/tb_processor_bindtop/clk" type="logic">
       <obj_property name="ElementShortName">clk</obj_property>
       <obj_property name="ObjectShortName">clk</obj_property>
    </wvobject>
-   <wvobject fp_name="/testbench_fetch/reset" type="logic">
+   <wvobject fp_name="/tb_processor_bindtop/reset" type="logic">
       <obj_property name="ElementShortName">reset</obj_property>
       <obj_property name="ObjectShortName">reset</obj_property>
    </wvobject>
-   <wvobject fp_name="/testbench_fetch/run" type="logic">
+   <wvobject fp_name="/tb_processor_bindtop/run" type="logic">
       <obj_property name="ElementShortName">run</obj_property>
       <obj_property name="ObjectShortName">run</obj_property>
    </wvobject>
-   <wvobject fp_name="/testbench_fetch/cont" type="logic">
+   <wvobject fp_name="/tb_processor_bindtop/cont" type="logic">
       <obj_property name="ElementShortName">cont</obj_property>
       <obj_property name="ObjectShortName">cont</obj_property>
    </wvobject>
-   <wvobject fp_name="/testbench_fetch/sw" type="array">
+   <wvobject fp_name="/tb_processor_bindtop/sw" type="array">
       <obj_property name="ElementShortName">sw[15:0]</obj_property>
       <obj_property name="ObjectShortName">sw[15:0]</obj_property>
    </wvobject>
-   <wvobject fp_name="/testbench_fetch/led" type="array">
+   <wvobject fp_name="/tb_processor_bindtop/led" type="array">
       <obj_property name="ElementShortName">led[15:0]</obj_property>
       <obj_property name="ObjectShortName">led[15:0]</obj_property>
    </wvobject>
-   <wvobject fp_name="/testbench_fetch/hex_seg_left" type="array">
+   <wvobject fp_name="/tb_processor_bindtop/hex_seg_left" type="array">
       <obj_property name="ElementShortName">hex_seg_left[7:0]</obj_property>
       <obj_property name="ObjectShortName">hex_seg_left[7:0]</obj_property>
    </wvobject>
-   <wvobject fp_name="/testbench_fetch/hex_seg_right" type="array">
+   <wvobject fp_name="/tb_processor_bindtop/hex_seg_right" type="array">
       <obj_property name="ElementShortName">hex_seg_right[7:0]</obj_property>
       <obj_property name="ObjectShortName">hex_seg_right[7:0]</obj_property>
    </wvobject>
-   <wvobject fp_name="/testbench_fetch/hex_grid_left" type="array">
+   <wvobject fp_name="/tb_processor_bindtop/hex_grid_left" type="array">
       <obj_property name="ElementShortName">hex_grid_left[3:0]</obj_property>
       <obj_property name="ObjectShortName">hex_grid_left[3:0]</obj_property>
    </wvobject>
-   <wvobject fp_name="/testbench_fetch/hex_grid_right" type="array">
+   <wvobject fp_name="/tb_processor_bindtop/hex_grid_right" type="array">
       <obj_property name="ElementShortName">hex_grid_right[3:0]</obj_property>
       <obj_property name="ObjectShortName">hex_grid_right[3:0]</obj_property>
    </wvobject>
-   <wvobject fp_name="/testbench_fetch/pc" type="array">
-      <obj_property name="ElementShortName">pc[15:0]</obj_property>
-      <obj_property name="ObjectShortName">pc[15:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/testbench_fetch/ir" type="array">
-      <obj_property name="ElementShortName">ir[15:0]</obj_property>
-      <obj_property name="ObjectShortName">ir[15:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/testbench_fetch/mar" type="array">
+   <wvobject fp_name="/tb_processor_bindtop/dut/slc3/cpu/mar" type="array">
       <obj_property name="ElementShortName">mar[15:0]</obj_property>
       <obj_property name="ObjectShortName">mar[15:0]</obj_property>
    </wvobject>
-   <wvobject fp_name="/testbench_fetch/PROGRAM" type="array">
-      <obj_property name="ElementShortName">PROGRAM[0:2][15:0]</obj_property>
-      <obj_property name="ObjectShortName">PROGRAM[0:2][15:0]</obj_property>
+   <wvobject fp_name="/tb_processor_bindtop/dut/slc3/cpu/mdr" type="array">
+      <obj_property name="ElementShortName">mdr[15:0]</obj_property>
+      <obj_property name="ObjectShortName">mdr[15:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_processor_bindtop/dut/slc3/cpu/ir" type="array">
+      <obj_property name="ElementShortName">ir[15:0]</obj_property>
+      <obj_property name="ObjectShortName">ir[15:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_processor_bindtop/dut/slc3/cpu/pc" type="array">
+      <obj_property name="ElementShortName">pc[15:0]</obj_property>
+      <obj_property name="ObjectShortName">pc[15:0]</obj_property>
    </wvobject>
 </wave_config>
