@@ -20,7 +20,12 @@
 //    Revised 09-25-2024
 //------------------------------------------------------------------------------
 
-module cpu (
+module cpu #
+(
+  parameter int REG_COUNT  = 8
+)(
+
+
     input   logic        clk,
     input   logic        reset,
 
@@ -46,6 +51,9 @@ logic ld_led;
 
 logic gate_pc;
 logic gate_mdr;
+logic gate_marmux;
+logic gate_alu;
+
 
 //selector bits for muxes
 logic [1:0] pcmux;
@@ -56,6 +64,10 @@ logic [15:0] mdr;
 logic [15:0] ir;
 logic [15:0] pc;
 logic ben;
+
+logic reg_count;
+
+assign reg_count = 8;
 
 
 assign mem_addr = mar;
@@ -130,6 +142,16 @@ load_reg #(.DATA_WIDTH(16)) mdr_reg (
 
     .data_q(mdr)
 );
+
+genvar i;
+generate
+    for (i = 0; i < REG_COUNT; i++)
+    begin
+        load_reg #(.DATA_WIDTH(16)) file_reg
+        (
+        );
+    end
+endgenerate
 
 
 endmodule
