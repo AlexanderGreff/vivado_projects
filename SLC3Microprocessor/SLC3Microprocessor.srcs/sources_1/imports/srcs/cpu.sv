@@ -22,7 +22,8 @@
 
 module cpu #
 (
-  parameter int REG_COUNT  = 8
+  parameter int REG_COUNT  = 8,
+  parameter int DATA_WIDTH = 16
 )(
 
 
@@ -31,12 +32,12 @@ module cpu #
 
     input   logic        run_i,
     input   logic        continue_i,
-    output  logic [15:0] hex_display_debug,
-    output  logic [15:0] led_o,
+    output  logic [DATA_WIDTH-1:0] hex_display_debug,
+    output  logic [DATA_WIDTH-1:0] led_o,
    
-    input   logic [15:0] mem_rdata,
-    output  logic [15:0] mem_wdata,
-    output  logic [15:0] mem_addr,
+    input   logic [DATA_WIDTH-1:0] mem_rdata,
+    output  logic [DATA_WIDTH-1:0] mem_wdata,
+    output  logic [DATA_WIDTH-1:0] mem_addr,
     output  logic        mem_mem_ena,
     output  logic        mem_wr_ena
 );
@@ -47,6 +48,7 @@ logic ld_mar;
 logic ld_mdr; 
 logic ld_ir; 
 logic ld_pc; 
+logic ld_reg;
 logic ld_led;
 
 logic gate_pc;
@@ -54,24 +56,39 @@ logic gate_mdr;
 logic gate_marmux;
 logic gate_alu;
 
+//sr1 and control bit
+//logic [2:0] sr1;
+logic sr1mux;
+
+logic [DATA_WIDTH-1:0] sr1_out;
+logic [DATA_WIDTH-1:0] sr2_out;
+
+//sr2 3-bit input
+logic [2:0] sr2;
+
+logic [DATA_WIDTH-1:0] q [REG_COUNT];
+
 
 //selector bits for muxes
 logic [1:0] pcmux;
+logic drmux;
 logic mio_en;
 
-logic [15:0] mar; 
-logic [15:0] mdr;
-logic [15:0] ir;
-logic [15:0] pc;
+logic [REG_COUNT-1:0]  we;
+
+logic [DATA_WIDTH-1:0] data_in;
+
+logic [DATA_WIDTH-1:0] mar; 
+logic [DATA_WIDTH-1:0] mdr;
+logic [DATA_WIDTH-1:0] ir;
+logic [DATA_WIDTH-1:0] pc;
 logic ben;
-
-logic reg_count;
-
-assign reg_count = 8;
-
+logic [2:0] dr;
 
 assign mem_addr = mar;
 assign mem_wdata = mdr;
+
+
 
 // State machine, you need to fill in the code here as well
 // .* auto-infers module input/output connections which have the same name
@@ -85,7 +102,7 @@ control cpu_control (
 assign led_o = ir;
 assign hex_display_debug = ir;
 
-logic [15:0] pc_in;
+logic [DATA_WIDTH-1:0] pc_in;
 always_comb 
 begin
     pc_in = pc;
@@ -103,7 +120,7 @@ begin
 //    endcase
 end
 
-load_reg #(.DATA_WIDTH(16)) ir_reg (
+load_reg #(.DATA_WIDTH(DATA_WIDTH)) ir_reg (
     .clk    (clk),
     .reset  (reset),
 
@@ -113,7 +130,7 @@ load_reg #(.DATA_WIDTH(16)) ir_reg (
     .data_q (ir)
 );
 
-load_reg #(.DATA_WIDTH(16)) pc_reg (
+load_reg #(.DATA_WIDTH(DATA_WIDTH)) pc_reg (
     .clk(clk),
     .reset(reset),
 
@@ -123,7 +140,7 @@ load_reg #(.DATA_WIDTH(16)) pc_reg (
     .data_q(pc)
 );
 
-load_reg #(.DATA_WIDTH(16)) mar_reg (
+load_reg #(.DATA_WIDTH(DATA_WIDTH)) mar_reg (
     .clk(clk),
     .reset(reset),
 
@@ -133,7 +150,7 @@ load_reg #(.DATA_WIDTH(16)) mar_reg (
     .data_q(mar)
 );
 
-load_reg #(.DATA_WIDTH(16)) mdr_reg (
+load_reg #(.DATA_WIDTH(DATA_WIDTH)) mdr_reg (
     .clk(clk),
     .reset(reset),
 
@@ -143,15 +160,28 @@ load_reg #(.DATA_WIDTH(16)) mdr_reg (
     .data_q(mdr)
 );
 
-genvar i;
-generate
-    for (i = 0; i < REG_COUNT; i++)
-    begin
-        load_reg #(.DATA_WIDTH(16)) file_reg
-        (
-        );
-    end
-endgenerate
+always_comb
+begin case(drmux)
+    1'b0: dr = ir[11:9];
+    1'b1: dr = 3'b111;
+    endcase
+end
+
+reg_file #(.DATA_WIDTH(DATA_WIDTH),.REG_COUNT(REG_COUNT)) file_reg
+(
+    .ld_reg(ld_reg),
+    .ir(ir),
+    .dr(dr),
+    .sr1mux(sr1mux),
+    .sr2(sr2),
+    .clk(clk),
+    
+    .sr1_out(sr1_out),
+    .sr2_out(sr2_out)
+);
+
+
+
 
 
 endmodule
