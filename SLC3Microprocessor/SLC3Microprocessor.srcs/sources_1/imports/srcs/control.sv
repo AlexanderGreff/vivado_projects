@@ -42,11 +42,9 @@ module control (
 	output logic		gate_pc,
 	output logic		gate_mdr,
 	output logic        mio_en,
-						
+	output logic [1:0]  alu_k,
 	output logic [1:0]	pcmux,
-	
-	//You should add additional control signals according to the SLC-3 datapath design
-
+	output logic        sr2mux,
 	output logic		mem_mem_ena, // Mem Operation Enable
 	output logic		mem_wr_ena  // Mem Write Enable
 );
@@ -69,7 +67,8 @@ module control (
 		s_7,
 		s_9,
 		s_12,
-		s_13
+		s_13,
+		s_22
 	} state, state_nxt;   // Internal state logic
 
 
@@ -96,6 +95,7 @@ module control (
 		gate_pc = 1'b0;
 		gate_mdr = 1'b0;
 		 
+		alu_k = 2'b00;
 		pcmux = 2'b00;
 		
 	
@@ -122,19 +122,34 @@ module control (
 					ld_ir = 1'b1;
 				end
 			s_32 :
-			     begin
+			    begin
 			         unique case (ir[15:12])
-			             4'b0: state_nxt = s_0;      //BR
-			             4'b0001: state_nxt = s_1;  //ADD
-			             4'b0100: state_nxt = s_4;  //JSR
-			             4'b0101: state_nxt = s_5;  //AND
-			             4'b0110: state_nxt = s_6;  //LDR
-			             4'b0111: state_nxt = s_7;  //STR
-			             4'b1001: state_nxt = s_9;  //NOT
-			             4'b1100: state_nxt = s_12; //JMP
-			             4'b1101: state_nxt = s_13; //PSE
+			             4'b0: state_nxt = s_0;                      //BR
+			             4'b0001: state_nxt = s_1;                  //ADD
+			             4'b0100: state_nxt = s_4;                  //JSR
+			             4'b0101: state_nxt = s_5;                  //AND
+			             4'b0110: state_nxt = s_6;                  //LDR
+			             4'b0111: state_nxt = s_7;                  //STR
+			             4'b1001: state_nxt = s_9;                  //NOT
+			             4'b1100: state_nxt = s_12;                 //JMP
+			             4'b1101: state_nxt = s_13;                 //PSE
 			          endcase 
-			      end
+			     end
+			s_0:
+			     begin
+			         if (ben)
+			             state_nxt = s_22;
+			         else
+			             state_nxt = s_18;
+			     end
+			 s_1:
+			     begin
+			         if (ir[5])
+			             sr2mux = 1'b1;
+			     end
+			
+			     
+			     
 				
 				
 				
