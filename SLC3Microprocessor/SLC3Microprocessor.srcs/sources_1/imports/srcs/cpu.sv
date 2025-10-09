@@ -108,7 +108,6 @@ assign pc_offset11= {{(DATA_WIDTH-11){ir[10]}}, ir[10:0]};
 
 logic [DATA_WIDTH-1:0] pc;
 logic ben;
-logic [2:0] dr;
 
 assign mem_addr = mar;
 assign mem_wdata = mdr;
@@ -210,18 +209,12 @@ load_reg #(.DATA_WIDTH(DATA_WIDTH)) mdr_reg (
     .data_q(mdr)
 );
 
-always_comb
-begin case(drmux)
-    1'b0: dr = ir[11:9];
-    1'b1: dr = 3'b111;
-    endcase
-end
 
 reg_file #(.DATA_WIDTH(DATA_WIDTH),.REG_COUNT(REG_COUNT)) file_reg
 (
     .ld_reg(ld_reg),
     .ir(ir),
-    .dr(dr),
+    .drmux(drmux),
     .sr1mux(sr1mux),
     .sr2(sr2),
     .clk(clk),

@@ -38,15 +38,21 @@ module control (
 	output logic		ld_ir,
 	output logic		ld_pc,
 	output logic        ld_led,
+	output logic        ld_reg,
+	output logic        ld_cc,
 						
 	output logic		gate_pc,
 	output logic		gate_mdr,
+	output logic        gate_alu,
 	output logic        mio_en,
 	output logic [1:0]  alu_k,
 	output logic [1:0]	pcmux,
+	output logic        sr1mux,
 	output logic        sr2mux,
 	output logic		mem_mem_ena, // Mem Operation Enable
-	output logic		mem_wr_ena  // Mem Write Enable
+	output logic		mem_wr_ena,  // Mem Write Enable
+	output logic        drmux,
+	output logic [2:0]  sr2
 );
 
 	enum logic [4:0] {
@@ -91,12 +97,17 @@ module control (
 		ld_ir = 1'b0;
 		ld_pc = 1'b0;
 		ld_led = 1'b0;
+		ld_reg = 1'b0;
+		ld_cc = 1'b0;
 		
 		gate_pc = 1'b0;
 		gate_mdr = 1'b0;
 		 
 		alu_k = 2'b00;
 		pcmux = 2'b00;
+		sr1mux = 1'b0;
+		sr2mux = 1'b0;
+		drmux = 1'b0;
 		
 	
 		// Assign relevant control signals based on current state
@@ -109,18 +120,20 @@ module control (
 					pcmux = 2'b00;
 					ld_pc = 1'b1;
 				end
+				
 			s_33_1, s_33_2, s_33_3 : //you may have to think about this as well to adapt to ram with wait-states
 				begin
 					mem_mem_ena = 1'b1;
 					mio_en = 1'b0;
 					ld_mdr = 1'b1;
-					
 				end
+				
 			s_35 : 
 				begin 
 					gate_mdr = 1'b1;
 					ld_ir = 1'b1;
 				end
+				
 			s_32 :
 			    begin
 			         unique case (ir[15:12])
@@ -135,6 +148,7 @@ module control (
 			             4'b1101: state_nxt = s_13;                 //PSE
 			          endcase 
 			     end
+			     
 			s_0:
 			     begin
 			         if (ben)
@@ -142,11 +156,41 @@ module control (
 			         else
 			             state_nxt = s_18;
 			     end
+			     
 			 s_1:
 			     begin
-			         if (ir[5])
-			             sr2mux = 1'b1;
+			         if (ir[5])//ADDi
+			         begin 
+			             sr2mux = 1'b1; //select imm5
+			             sr1mux = 1'b0; //select ir[8:6]
+			             alu_k = 2'b00; //ADD sr1(ir[8:6]) + imm5 
+			             gate_alu = 1'b1; //puts result on the bus
+//			             dr = ir[11:9];
+			             ld_reg = 1'b1; //load register
+			             ld_cc =  1'b1; //set cc
+			         end
+			         else //ADD
+			             begin
+			                 sr2mux = 1'b0; //select sr2_out
+			                 sr1mux = 1'b0; //select ir[8:6]
+			                 sr2 = ir[2:0];  
+			                 alu_k = 2'b00; //add sr1(ir[8:6]) + sr2
+			                 gate_alu = 1'b1; //puts result on the bus
+//			                 dr = ir[11:9];
+                             ld_reg = 1'b1; //load register
+                             ld_cc =  1'b1; //set cc
+			             end
+			          state_nxt = s_18;
 			     end
+			     
+			 s_4:
+			     begin
+			         gate_pc = 1'b1; //put pc onto bus
+//			         dr = 3'b1; // dr = r7
+			         ld_reg = 1'b1; // load register
+			     end
+			    
+			     
 			
 			     
 			     

@@ -27,7 +27,7 @@ parameter int DATA_WIDTH = 16
     input logic ld_reg,
     input logic clk,
     input logic [DATA_WIDTH-1:0] ir,
-    input logic [2:0] dr,
+    input logic drmux,
     input logic sr1mux,
     input logic [2:0] sr2,
     
@@ -36,7 +36,8 @@ parameter int DATA_WIDTH = 16
     output logic [DATA_WIDTH-1:0] sr2_out
  );
  
-
+logic [2:0] dr;
+assign dr = drmux ? 3'b111 : ir[11:9];
 
 logic [2:0] sr1;
 logic [REG_COUNT-1:0]  we;
