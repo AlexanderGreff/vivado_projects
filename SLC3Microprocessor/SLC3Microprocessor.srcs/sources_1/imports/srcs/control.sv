@@ -33,7 +33,7 @@ module control (
 	input logic 		continue_i,
 	input logic 		run_i,
 
-	output logic		ld_mar,
+	output logic		ld_mar,  
 	output logic		ld_mdr,
 	output logic		ld_ir,
 	output logic		ld_pc,
@@ -41,6 +41,7 @@ module control (
 						
 	output logic		gate_pc,
 	output logic		gate_mdr,
+	output logic        mio_en,
 						
 	output logic [1:0]	pcmux,
 	
@@ -58,7 +59,17 @@ module control (
 		s_33_1,
 		s_33_2,
 		s_33_3,
-		s_35
+		s_35,
+		s_32,
+		s_0,
+		s_1,
+		s_4,
+		s_5,
+		s_6,
+		s_7,
+		s_9,
+		s_12,
+		s_13
 	} state, state_nxt;   // Internal state logic
 
 
@@ -101,18 +112,39 @@ module control (
 			s_33_1, s_33_2, s_33_3 : //you may have to think about this as well to adapt to ram with wait-states
 				begin
 					mem_mem_ena = 1'b1;
+					mio_en = 1'b0;
 					ld_mdr = 1'b1;
+					
 				end
 			s_35 : 
 				begin 
 					gate_mdr = 1'b1;
 					ld_ir = 1'b1;
 				end
-			pause_ir1: ld_led = 1'b1; 
-			pause_ir2: ld_led = 1'b1; 
-			// you need to finish the rest of state output logic..... 
-
-			default : ;
+			s_32 :
+			     begin
+			         unique case (ir[15:12])
+			             4'b0: state_nxt = s_0;      //BR
+			             4'b0001: state_nxt = s_1;  //ADD
+			             4'b0100: state_nxt = s_4;  //JSR
+			             4'b0101: state_nxt = s_5;  //AND
+			             4'b0110: state_nxt = s_6;  //LDR
+			             4'b0111: state_nxt = s_7;  //STR
+			             4'b1001: state_nxt = s_9;  //NOT
+			             4'b1100: state_nxt = s_12; //JMP
+			             4'b1101: state_nxt = s_13; //PSE
+			          endcase 
+			      end
+				
+				
+				
+				
+				
+				
+				
+//			pause_ir1: ld_led = 1'b1; 
+//			pause_ir2: ld_led = 1'b1; 
+			// you need to finish the rest of state output logic....			
 		endcase
 	end 
 
@@ -135,15 +167,15 @@ module control (
 			s_33_3 : 
 				state_nxt = s_35;
 			s_35 : 
-				state_nxt = pause_ir1;
+				state_nxt = s_32;
 			// pause_ir1 and pause_ir2 are only for week 1 such that TAs can see 
 			// the values in ir.
-			pause_ir1 : 
-				if (continue_i) 
-					state_nxt = pause_ir2;
-			pause_ir2 : 
-				if (~continue_i)
-					state_nxt = s_18;
+//			pause_ir1 : 
+//				if (continue_i) 
+//					state_nxt = pause_ir2;
+//			pause_ir2 : 
+//				if (~continue_i)
+//					state_nxt = s_18;
 			// you need to finish the rest of state transition logic.....
 			
 			default :;
