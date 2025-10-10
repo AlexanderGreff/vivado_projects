@@ -31,6 +31,7 @@ parameter int DATA_WIDTH = 16
     input logic sr1mux,
     input logic [2:0] sr2,
     input logic reset,
+    input logic [DATA_WIDTH-1:0] data_in,
     
     
     output logic [DATA_WIDTH-1:0] sr1_out,
