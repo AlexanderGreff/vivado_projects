@@ -57,8 +57,6 @@ logic gate_mdr;
 logic gate_marmux;
 logic gate_alu;
 
-logic [DATA_WIDTH-1:0] pc_out;
-logic [DATA_WIDTH-1:0] mdr_out;
 logic [DATA_WIDTH-1:0] marmux_out;
 logic [DATA_WIDTH-1:0] alu_out;
 logic [DATA_WIDTH-1:0] shared_bus;
@@ -155,9 +153,10 @@ assign marmux_out = effective_addr_out;
 
 always_comb
 begin 
+  shared_bus = '0;
   unique case (1'b1)
-  gate_pc:     shared_bus = pc_out;
-  gate_mdr:    shared_bus = mdr_out;
+  gate_pc:     shared_bus = pc;
+  gate_mdr:    shared_bus = mdr;
   gate_marmux: shared_bus = marmux_out;
   gate_alu:    shared_bus = alu_out;
 endcase
