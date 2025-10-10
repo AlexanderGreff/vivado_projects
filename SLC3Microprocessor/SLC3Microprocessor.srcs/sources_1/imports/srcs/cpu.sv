@@ -226,6 +226,7 @@ reg_file #(.DATA_WIDTH(DATA_WIDTH),.REG_COUNT(REG_COUNT)) file_reg
     .sr1mux(sr1mux),
     .sr2(sr2),
     .clk(clk),
+    .reset(reset),
     
     .sr1_out(sr1_out),
     .sr2_out(sr2_out)
