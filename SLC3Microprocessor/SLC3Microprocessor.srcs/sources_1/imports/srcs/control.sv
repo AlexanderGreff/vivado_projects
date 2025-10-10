@@ -162,28 +162,7 @@ module control (
 					ld_ir = 1'b1;
 				end
 				
-			s_32 :
-			    begin
-			         unique case (ir[15:12])
-			             4'b0000: state_nxt = s_0;                   //BR
-			             4'b0001: state_nxt = s_1;                  //ADD
-			             4'b0100: state_nxt = s_4;                  //JSR
-			             4'b0101: state_nxt = s_5;                  //AND
-			             4'b0110: state_nxt = s_6;                  //LDR
-			             4'b0111: state_nxt = s_7;                  //STR
-			             4'b1001: state_nxt = s_9;                  //NOT
-			             4'b1100: state_nxt = s_12;                 //JMP
-			             4'b1101: state_nxt = s_13;                 //PSE
-			          endcase 
-			     end
 			     
-			s_0:
-			     begin
-			         if (ben)
-			             state_nxt = s_22;
-			         else
-			             state_nxt = s_18;
-			     end
 			     
 			 s_1:
 			     begin
@@ -208,7 +187,6 @@ module control (
                              ld_reg = 1'b1; //load register
                              ld_cc =  1'b1; //set cc
 			             end
-			          state_nxt = s_18;
 			     end
 			     
 			 s_4:
@@ -217,7 +195,6 @@ module control (
 			         drmux = 1'b1;
 			         ld_reg = 1'b1; // load register
 			         ld_cc = 1'b0; //no cc
-			         state_nxt = s_21;
 			     end
 			     
 			 s_21:
@@ -226,7 +203,6 @@ module control (
 			         addr2mux =  2'b00;
 			         pcmux = 2'b01;
 			         ld_pc = 1'b1;
-			         state_nxt = s_18;
 			     end
 			     
 			 s_5:
@@ -251,7 +227,6 @@ module control (
 			                 ld_reg =1'b1;
 			                 ld_cc = 1'b1;
 			             end
-			             state_nxt = s_18;
 			     end
 			     
 			 s_6: 
@@ -261,7 +236,6 @@ module control (
 			         addr2mux = 2'b10;
 			         gate_marmux = 1'b1;
 			         ld_mar = 1'b1;
-			         state_nxt = s_25_1;
 			     end
 			     
 			 s_25_1, s_25_2:
@@ -269,7 +243,6 @@ module control (
 			        mem_mem_ena = 1'b1;
 					mio_en = 1'b0;
 					ld_mdr = 1'b0;
-					state_nxt = s_25_3;
 			     end
 			     
 			  s_25_3:
@@ -277,7 +250,6 @@ module control (
 			        mem_mem_ena = 1'b1;
 					mio_en = 1'b0;
 					ld_mdr = 1'b1;
-					state_nxt = s_27;
                 end			  
 			     
 			  s_27:
@@ -286,7 +258,6 @@ module control (
 			         ld_reg = 1'b1;
    					 drmux = 1'b0;
    					 ld_cc = 1'b1;
-   					 state_nxt = s_18;
 			     end
 			 
 			 s_7:
@@ -296,7 +267,6 @@ module control (
 			         addr2mux = 2'b10;
 			         gate_marmux = 1'b1;
 			         ld_mar = 1'b1;
-			         state_nxt = s_23;
 			     end
 			     
 			 s_22:
@@ -315,13 +285,13 @@ module control (
 			         gate_marmux = 1'b1;
 			         mio_en = 1'b1;
 			         ld_mdr = 1'b1;
-			         state_nxt = s_16_1;
+			         
 			     end
 			  
 			  s_16_1, s_16_2, s_16_3:
 			     begin
+			        mem_mem_ena = 1'b1;
 			        mem_wr_ena = 1'b1; 
-			        state_nxt = s_18;
 			     end
 			     
 			 s_9:
@@ -332,7 +302,7 @@ module control (
 			         drmux = 1'b0;
 			         ld_reg = 1'b1;
 			         ld_cc = 1'b1;
-			         state_nxt = s_18;
+			         
 			     end
 			     
 			 s_12:
@@ -342,27 +312,6 @@ module control (
 			         addr2mux = 2'b11;
 			         pcmux = 2'b01;
 			         ld_pc = 1'b1;
-			         state_nxt = s_18;
-			     end
-			     
-			 pause_ir1:
-			     begin
-			     if (continue_i)
-			         begin 
-			             state_nxt = pause_ir2;
-			         end
-			         ld_led = 1'b1; 
-			         state_nxt = state;
-			     end
-			     
-			  pause_ir2:
-			     begin
-			     if (continue_i)
-			         begin 
-			             state_nxt = s_18;
-			         end
-			         ld_led = 1'b1; 
-			         state_nxt = state;
 			     end
 		endcase
 	end 
@@ -391,20 +340,71 @@ module control (
 			     state_nxt = s_25_2;
 			s_25_2:
 			     state_nxt = s_25_3;
+			s_25_3:
+			     state_nxt = s_27;
 			s_16_1:
 			     state_nxt = s_16_2;
 			s_16_2:
 			     state_nxt = s_16_3;
-			     
-			  
-			     
-			pause_ir1 : 
-				if (continue_i) 
+			s_16_3:
+			     state_nxt = s_18;
+			s_0:
+			     begin
+			         if (ben)
+			             state_nxt = s_22;
+			         else
+			             state_nxt = s_18;
+			     end
+			s_32 :
+			    begin
+			         unique case (ir[15:12])
+			             4'b0000: state_nxt = s_0;                   //BR
+			             4'b0001: state_nxt = s_1;                  //ADD
+			             4'b0100: state_nxt = s_4;                  //JSR
+			             4'b0101: state_nxt = s_5;                  //AND
+			             4'b0110: state_nxt = s_6;                  //LDR
+			             4'b0111: state_nxt = s_7;                  //STR
+			             4'b1001: state_nxt = s_9;                  //NOT
+			             4'b1100: state_nxt = s_12;                 //JMP
+			             4'b1101: state_nxt = s_13;                 //PSE
+			          endcase 
+			     end
+			 s_1: 
+			     state_nxt = s_18;
+			 s_4: 
+			     state_nxt = s_21;
+			 s_21: 
+			     state_nxt = s_18;
+			 s_5: 
+			     state_nxt = s_18;
+			 s_6: 
+			     state_nxt = s_25_1;
+			 s_27:
+			     state_nxt = s_18;
+			 s_7:
+			     state_nxt = s_23;
+			 s_23:
+			     state_nxt = s_16_1;
+			 s_9:
+			     state_nxt = s_18;   
+			 s_12:
+			     state_nxt = s_18;
+			 s_22:
+			     state_nxt = s_18;
+			 pause_ir1 : 
+				if (continue_i)
+				begin 
 					state_nxt = pause_ir2;
-			pause_ir2 : 
+					ld_led = 1'b1; 
+
+                end
+			 pause_ir2 : 
 				if (~continue_i)
+				begin
 					state_nxt = s_18;
-			// you need to finish the rest of state transition logic.....
+					ld_led = 1'b1; 
+			     end
+
 			
 			default :;
 		endcase
