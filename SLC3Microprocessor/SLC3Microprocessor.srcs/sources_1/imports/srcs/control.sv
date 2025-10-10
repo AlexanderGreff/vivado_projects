@@ -42,7 +42,10 @@ module control (
 	output logic        ld_cc,
 						
 	output logic		gate_pc,
+	output logic        addr1mux,
+	output logic [1:0]  addr2mux,
 	output logic		gate_mdr,
+	output logic        gate_marmux,
 	output logic        gate_alu,
 	output logic        mio_en,
 	output logic [1:0]  alu_k,
@@ -74,7 +77,16 @@ module control (
 		s_9,
 		s_12,
 		s_13,
-		s_22
+		s_16_1,
+		s_16_2,
+		s_16_3,
+		s_21,
+		s_22,
+		s_23,
+		s_25_1,
+		s_25_2,
+		s_25_3,
+		s_27
 	} state, state_nxt;   // Internal state logic
 
 
@@ -102,12 +114,21 @@ module control (
 		
 		gate_pc = 1'b0;
 		gate_mdr = 1'b0;
+		mio_en = 1'b0;
 		 
 		alu_k = 2'b00;
 		pcmux = 2'b00;
 		sr1mux = 1'b0;
 		sr2mux = 1'b0;
 		drmux = 1'b0;
+		addr1mux = 1'b0;
+		addr2mux =  2'b00;
+		gate_alu = 1'b0;
+		gate_marmux =1'b0;
+		mem_mem_ena = 1'b0;
+		mem_wr_ena =1'b0;
+		sr2 = 3'b0;
+		state_nxt = state;
 		
 	
 		// Assign relevant control signals based on current state
@@ -165,7 +186,7 @@ module control (
 			             sr1mux = 1'b0; //select ir[8:6]
 			             alu_k = 2'b00; //ADD sr1(ir[8:6]) + imm5 
 			             gate_alu = 1'b1; //puts result on the bus
-//			             dr = ir[11:9];
+			             drmux = 1'b0;
 			             ld_reg = 1'b1; //load register
 			             ld_cc =  1'b1; //set cc
 			         end
@@ -176,7 +197,7 @@ module control (
 			                 sr2 = ir[2:0];  
 			                 alu_k = 2'b00; //add sr1(ir[8:6]) + sr2
 			                 gate_alu = 1'b1; //puts result on the bus
-//			                 dr = ir[11:9];
+			                 drmux = 1'b0;
                              ld_reg = 1'b1; //load register
                              ld_cc =  1'b1; //set cc
 			             end
@@ -186,10 +207,143 @@ module control (
 			 s_4:
 			     begin
 			         gate_pc = 1'b1; //put pc onto bus
-//			         dr = 3'b1; // dr = r7
+			         drmux = 1'b1;
 			         ld_reg = 1'b1; // load register
+			         ld_cc = 1'b0; //no cc
+			         state_nxt = s_21;
 			     end
-			    
+			     
+			 s_21:
+			     begin
+			         addr1mux = 1'b0;
+			         addr2mux =  2'b00;
+			         pcmux = 2'b01;
+			         ld_pc = 1'b1;
+			         state_nxt = s_18;
+			     end
+			     
+			 s_5:
+			     begin
+			         if (ir[5])
+			         begin
+			             sr2mux = 1'b1;
+			             sr1mux = 1'b0;
+			             alu_k = 2'b01;
+			             gate_alu = 1'b1;
+			             drmux = 1'b0;
+			             ld_reg = 1'b1;
+			             ld_cc = 1'b1;
+			         end
+			         else
+			             begin
+			                 sr2mux = 1'b0;
+			                 sr1mux = 1'b0;
+			                 alu_k = 2'b01;
+			                 gate_alu = 1'b1;
+			                 drmux = 1'b0;
+			                 ld_reg =1'b1;
+			                 ld_cc = 1'b1;
+			             end
+			             state_nxt = s_18;
+			     end
+			     
+			 s_6: 
+			     begin
+			         sr1mux = 1'b0;
+			         addr1mux = 1'b1;
+			         addr2mux = 2'b10;
+			         gate_marmux = 1'b1;
+			         ld_mar = 1'b1;
+			         state_nxt = s_25_1;
+			     end
+			     
+			 s_25_1, s_25_2, s_25_3:
+			     begin
+			        mem_mem_ena = 1'b1;
+					mio_en = 1'b0;
+					ld_mdr = 1'b1;
+					state_nxt = s_27;
+			     end
+			     
+			  s_27:
+			     begin
+			         gate_mdr = 1'b1;
+			         ld_reg = 1'b1;
+   					 drmux = 1'b0;
+   					 ld_cc = 1'b1;
+   					 state_nxt = s_18;
+			     end
+			 
+			 s_7:
+			     begin
+                     sr1mux = 1'b0;
+			         addr1mux = 1'b1;
+			         addr2mux = 2'b10;
+			         gate_marmux = 1'b1;
+			         ld_mar = 1'b1;
+			         state_nxt = s_23;
+			     end
+			     
+			 s_23:
+			     begin
+			         sr1mux = 1'b1;
+			         addr1mux = 1'b1;
+			         addr2mux = 2'b11;
+			         gate_marmux = 1'b1;
+			         mio_en = 1'b1;
+			         ld_mdr = 1'b1;
+			     end
+			  
+			  s_16_1, s_16_2, s_16_3:
+			     begin
+			        mem_wr_ena = 1'b1; 
+			        state_nxt = s_18;
+			     end
+			     
+			 s_9:
+			     begin
+			         sr1mux = 1'b0;
+			         alu_k = 2'b10;
+			         gate_alu = 1'b1;
+			         drmux = 1'b0;
+			         ld_reg = 1'b1;
+			         ld_cc = 1'b1;
+			         state_nxt = s_18;
+			     end
+			     
+			 s_12:
+			     begin
+			         sr1mux = 1'b0;
+			         addr1mux = 1'b1;
+			         addr2mux = 2'b11;
+			         pcmux = 2'b01;
+			         ld_pc = 1'b1;
+			         state_nxt = s_18;
+			     end
+			     
+			 pause_ir1:
+			     begin
+			     if (continue_i)
+			         begin 
+			             state_nxt = pause_ir2;
+			         end
+			         ld_led = 1'b1; 
+			         state_nxt = state;
+			     end
+			     
+			  pause_ir2:
+			     begin
+			     if (continue_i)
+			         begin 
+			             state_nxt = s_18;
+			         end
+			         ld_led = 1'b1; 
+			         state_nxt = state;
+			     end
+
+			  
+			  
+			     
 			     
 			
 			     
@@ -201,8 +355,7 @@ module control (
 				
 				
 				
-//			pause_ir1: ld_led = 1'b1; 
-//			pause_ir2: ld_led = 1'b1; 
+			pause_ir2: ld_led = 1'b1; 
 			// you need to finish the rest of state output logic....			
 		endcase
 	end 

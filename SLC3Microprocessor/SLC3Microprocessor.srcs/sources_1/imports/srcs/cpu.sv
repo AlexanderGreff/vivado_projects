@@ -126,7 +126,15 @@ control cpu_control (
 );
 
 
-assign led_o = ir;
+
+always_comb begin
+    if (ld_led)
+        led_o = {4'b0, ir[11:0]};
+    else
+        led_o = ir; 
+end
+
+    
 assign hex_display_debug = ir;
 
 logic [DATA_WIDTH-1:0] pc_in;
