@@ -276,15 +276,24 @@ module control (
 			     end
 			     
 			 s_23:
-			     begin
-			         sr1mux = 1'b1;
-			         addr1mux = 1'b1;
-			         addr2mux = 2'b11;
-			         gate_marmux = 1'b1;
-			         mio_en = 1'b1;
-			         ld_mdr = 1'b1;
-			         
-			     end
+			 begin
+                sr1mux   = 1'b1;   
+                alu_k    = 2'b11; 
+                gate_alu = 1'b1;   
+            
+                mio_en   = 1'b1;   
+                ld_mdr   = 1'b1;
+            end
+            //			     begin
+//			         sr1mux = 1'b1;
+//			         addr1mux = 1'b1;
+//			         addr2mux = 2'b11;
+//			         gate_marmux = 1'b1;
+//			         mio_en = 1'b1;
+//			         ld_mdr = 1'b1;
+//			     end
+
+
 			  
 			  s_16_1, s_16_2, s_16_3:
 			     begin
