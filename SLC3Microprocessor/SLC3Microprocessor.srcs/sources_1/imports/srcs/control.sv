@@ -219,6 +219,7 @@ module control (
 			             begin
 			                 sr2mux = 1'b0;
 			                 sr1mux = 1'b0;
+			                 sr2 = ir[2:0];
 			                 alu_k = 2'b01;
 			                 gate_alu = 1'b1;
 			                 drmux = 1'b0;
