@@ -128,8 +128,6 @@ module control (
 		mem_mem_ena = 1'b0;
 		mem_wr_ena =1'b0;
 		sr2 = 3'b0;
-		state_nxt = state;
-		
 	
 		// Assign relevant control signals based on current state
 		case (state)
@@ -366,7 +364,7 @@ module control (
 			             4'b0111: state_nxt = s_7;                  //STR
 			             4'b1001: state_nxt = s_9;                  //NOT
 			             4'b1100: state_nxt = s_12;                 //JMP
-			             4'b1101: state_nxt = s_13;                 //PSE
+			             4'b1101: state_nxt = pause_ir1;            //PSE
 			          endcase 
 			     end
 			 s_1: 
