@@ -311,8 +311,22 @@ module control (
 			         pcmux = 2'b01;
 			         ld_pc = 1'b1;
 			     end
+			 pause_ir1:
+			 begin
+			 	ld_led = 1'b1; 
+			 end
+			 
+			 pause_ir2:
+			 begin
+			 	ld_led = 1'b1; 
+			 end
+
+
+			  
+			     
 		endcase
 	end 
+	
 
 
 	always_comb
@@ -393,14 +407,11 @@ module control (
 				if (continue_i)
 				begin 
 					state_nxt = pause_ir2;
-					ld_led = 1'b1; 
-
                 end
 			 pause_ir2 : 
 				if (~continue_i)
 				begin
 					state_nxt = s_18;
-					ld_led = 1'b1; 
 			     end
 
 			
