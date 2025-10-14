@@ -1,0 +1,6 @@
+C:/Users/alexa/vivado_projects/microblaze_soc_demo/sdk/blinky/microblaze_0/standalone_microblaze_0/bsp/libsrc/build_configs/exmetadata/CMakeFiles/gpio_example.dir
+C:/Users/alexa/vivado_projects/microblaze_soc_demo/sdk/blinky/microblaze_0/standalone_microblaze_0/bsp/libsrc/build_configs/exmetadata/CMakeFiles/uartlite_example.dir
+C:/Users/alexa/vivado_projects/microblaze_soc_demo/sdk/blinky/microblaze_0/standalone_microblaze_0/bsp/libsrc/build_configs/exmetadata/CMakeFiles/intc_example.dir
+C:/Users/alexa/vivado_projects/microblaze_soc_demo/sdk/blinky/microblaze_0/standalone_microblaze_0/bsp/libsrc/build_configs/exmetadata/CMakeFiles/bram_example.dir
+C:/Users/alexa/vivado_projects/microblaze_soc_demo/sdk/blinky/microblaze_0/standalone_microblaze_0/bsp/libsrc/build_configs/exmetadata/CMakeFiles/edit_cache.dir
+C:/Users/alexa/vivado_projects/microblaze_soc_demo/sdk/blinky/microblaze_0/standalone_microblaze_0/bsp/libsrc/build_configs/exmetadata/CMakeFiles/rebuild_cache.dir

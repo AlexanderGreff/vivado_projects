@@ -1,0 +1,7 @@
+[
+{
+  "directory": "C:/Users/alexa/vivado_projects/microblaze_soc_demo/sdk/mb_blink_app/build",
+  "command": "C:\\Xilinx\\2025.1\\Vitis\\gnu\\microblaze\\nt\\bin\\mb-gcc.exe -isystem C:/Users/alexa/vivado_projects/microblaze_soc_demo/sdk/blinky/export/blinky/sw/standalone_microblaze_0/include -isystem C:/Xilinx/2025.1/gnu/microblaze/nt/x86_64-oesdk-mingw32/usr/lib/microblaze-xilinx-elf/gcc/microblaze-xilinx-elf/13.3.0/include -isystem C:/Xilinx/2025.1/gnu/microblaze/nt/x86_64-oesdk-mingw32/usr/lib/microblaze-xilinx-elf/gcc/microblaze-xilinx-elf/13.3.0/include-fixed -isystem C:/Xilinx/2025.1/Vitis/gnu/microblaze/nt/microblazeeb-xilinx-elf/usr/include   -mxl-barrel-shift -mlittle-endian -mxl-pattern-compare -mno-xl-reorder -mno-xl-soft-mul -mcpu=v11.0 -DSDT  -MMD -MP -specs=C:/Users/alexa/vivado_projects/microblaze_soc_demo/sdk/blinky/export/blinky/sw/standalone_microblaze_0/Xilinx.spec -IC:/Users/alexa/vivado_projects/microblaze_soc_demo/sdk/blinky/export/blinky/sw/standalone_microblaze_0/include -Wall -Wextra      -O0  -g3     -U__clang__ -o CMakeFiles\\mb_blink_app.elf.dir\\C_\\Users\\alexa\\vivado_projects\\microblaze_soc_demo\\sdk\\mb_blink_app\\mb_blink.c.obj -c C:\\Users\\alexa\\vivado_projects\\microblaze_soc_demo\\sdk\\mb_blink_app\\mb_blink.c",
+  "file": "C:\\Users\\alexa\\vivado_projects\\microblaze_soc_demo\\sdk\\mb_blink_app\\mb_blink.c"
+}
+]
