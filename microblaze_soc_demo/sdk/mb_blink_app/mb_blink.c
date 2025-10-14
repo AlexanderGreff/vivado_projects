@@ -26,15 +26,17 @@ volatile uint32_t* led_gpio_data = (volatile uint32_t *)( (uintptr_t)XPAR_AXI_GP
 int main()
 {
     // init_platform();
+	// xil_printf("hello\r\n");
 
 	while (1+1 != 3)
 	{
 		sleep(1);
 		*led_gpio_data |=  0x00000001;
-		printf("Led On!\r\n");
+		xil_printf("Led On!\r\n");
 		sleep(1);
 		*led_gpio_data &= ~0x00000001; //blinks LED
-		printf("Led Off!\r\n");
+		xil_printf("Led Off!\r\n");
+
 	}
 
     // cleanup_platform();

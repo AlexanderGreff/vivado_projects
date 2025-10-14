@@ -1,45 +1,45 @@
 {
-  "version": "0.2.0",
-  "configurations": [
-    {
-      "type": "tcf-debug",
-      "request": "launch",
-      "name": "mb_blink_app_app_hw_1",
-      "debugType": "baremetal-fpga",
-      "attachToRunningTargetOptions": {
-        "targetSetupMode": "standalone",
-        "executeScript": true,
-        "scriptPath": ""
-      },
-      "autoAttachProcessChildren": false,
-      "target": {
-        "targetConnectionId": "Local",
-        "peersIniPath": "../../_ide/.peers.ini",
-        "context": "fpga"
-      },
-      "pathMap": [],
-      "targetSetup": {
-        "resetSystem": true,
-        "programDevice": true,
-        "partialBitstream": false,
-        "skipRevisionCheck": false,
-        "device": {
-          "plDevice": "Auto Detect",
-          "psDevice": "Auto Detect"
-        },
-        "bitstreamFile": "${workspaceFolder}\\mb_blink_app\\_ide\\bitstream\\mb_intro_top.bit",
-        "downloadElf": [
-          {
-            "core": "microblaze_0",
-            "resetProcessor": true,
-            "elfFile": "${workspaceFolder}\\mb_blink_app\\build\\mb_blink_app.elf",
-            "stopAtEntry": false,
-            "isSelfRelocatingApp": false,
-            "relativeAddress": ""
-          }
-        ]
-      },
-      "internalConsoleOptions": "openOnSessionStart"
-    }
-  ]
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"type": "tcf-debug",
+			"request": "launch",
+			"name": "mb_blink_app_app_hw_1",
+			"debugType": "baremetal-fpga",
+			"attachToRunningTargetOptions": {
+				"targetSetupMode": "standalone",
+				"executeScript": true,
+				"scriptPath": ""
+			},
+			"autoAttachProcessChildren": false,
+			"target": {
+				"targetConnectionId": "Local",
+				"peersIniPath": "../../_ide/.peers.ini",
+				"context": "fpga"
+			},
+			"pathMap": [],
+			"targetSetup": {
+				"resetSystem": true,
+				"programDevice": true,
+				"partialBitstream": false,
+				"skipRevisionCheck": false,
+				"device": {
+					"plDevice": "Auto Detect",
+					"psDevice": "Auto Detect"
+				},
+				"bitstreamFile": "C:\\Users\\alexa\\vivado_projects\\microblaze_soc_demo\\microblaze_soc_demo.runs\\impl_1\\mb_intro_top.bit",
+				"downloadElf": [
+					{
+						"core": "microblaze_0",
+						"resetProcessor": true,
+						"elfFile": "${workspaceFolder}\\mb_blink_app\\build\\mb_blink_app.elf",
+						"stopAtEntry": false,
+						"isSelfRelocatingApp": false,
+						"relativeAddress": ""
+					}
+				]
+			},
+			"internalConsoleOptions": "openOnSessionStart"
+		}
+	]
 }
