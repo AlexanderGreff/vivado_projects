@@ -28,18 +28,10 @@ volatile uint32_t* btn1_gpio_data = (volatile uint32_t*)((uintptr_t)XPAR_AXI_GPI
 
 int main()
 {
-    // init_platform();
-	// xil_printf("hello\r\n");
 	uint16_t accumulator = 0;
 	uint16_t accumulator_prev = 0;
 	while (1)
 	{
-		// sleep(1);
-		// *led_gpio_data |=  0x00000001;
-		// xil_printf("Led On!\r\n");
-		// sleep(1);
-		// *led_gpio_data &= ~0x00000001; //blinks LED
-		// xil_printf("Led Off!\r\n");
 		if (*btn1_gpio_data == 0) //active low btn[1]
 		{
 			accumulator_prev = accumulator;
@@ -49,8 +41,12 @@ int main()
 				xil_printf("accumulator overflow!\r\n");
 			}
 			xil_printf("accumulator = %u\r\n", accumulator);
+			while (*btn1_gpio_data == 0)
+			{
+				msleep(20);
+			}
+			msleep(1);
 		}
 	}
-    // cleanup_platform();
     return 0;
 }
