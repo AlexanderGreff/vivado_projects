@@ -54,7 +54,7 @@
         "C_TRACE": [ { "value": "0", "resolve_type": "user", "format": "long", "usage": "all" } ],
         "C_LOCKSTEP_SELECT": [ { "value": "0", "resolve_type": "user", "format": "long", "usage": "all" } ],
         "C_ENABLE_DISCRETE_PORTS": [ { "value": "0", "resolve_type": "user", "format": "long", "usage": "all" } ],
-        "C_ENABLE_CONVERSION": [ { "value": "1", "resolve_type": "user", "format": "long", "usage": "all" } ],
+        "C_ENABLE_CONVERSION": [ { "value": "0", "value_src": "user", "resolve_type": "user", "format": "long", "usage": "all" } ],
         "C_M_AXI_DC_USER_SIGNALS": [ { "value": "0", "value_src": "propagated", "resolve_type": "user", "format": "long", "usage": "all" } ],
         "C_M_AXI_IC_USER_SIGNALS": [ { "value": "0", "value_src": "propagated", "resolve_type": "user", "format": "long", "usage": "all" } ],
         "G_TEMPLATE_LIST": [ { "value": "8", "value_src": "user", "resolve_type": "user", "format": "long", "usage": "all" } ],

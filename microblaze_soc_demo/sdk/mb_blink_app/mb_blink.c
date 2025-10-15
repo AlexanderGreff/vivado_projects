@@ -15,7 +15,10 @@
 
 // #include "platform.h"
 
-volatile uint32_t* led_gpio_data = (volatile uint32_t *)( (uintptr_t)XPAR_AXI_GPIO_0_BASEADDR ); // from base addr value found in xparameters.h
+volatile uint32_t* led_gpio_data = (volatile uint32_t*)((uintptr_t)XPAR_AXI_GPIO_0_BASEADDR); // from base addr value found in xparameters.h
+volatile uint32_t* sw_gpio_data = (volatile uint32_t*)((uintptr_t)XPAR_AXI_GPIO_1_BASEADDR);
+volatile uint32_t* btn1_gpio_data = (volatile uint32_t*)((uintptr_t)XPAR_AXI_GPIO_2_BASEADDR);
+
 
 
 															  //Hint: either find the manual address (via the memory map in the block diagram, or
@@ -27,19 +30,27 @@ int main()
 {
     // init_platform();
 	// xil_printf("hello\r\n");
-
-	while (1+1 != 3)
+	uint16_t accumulator = 0;
+	uint16_t accumulator_prev = 0;
+	while (1)
 	{
-		sleep(1);
-		*led_gpio_data |=  0x00000001;
-		xil_printf("Led On!\r\n");
-		sleep(1);
-		*led_gpio_data &= ~0x00000001; //blinks LED
-		xil_printf("Led Off!\r\n");
-
+		// sleep(1);
+		// *led_gpio_data |=  0x00000001;
+		// xil_printf("Led On!\r\n");
+		// sleep(1);
+		// *led_gpio_data &= ~0x00000001; //blinks LED
+		// xil_printf("Led Off!\r\n");
+		if (*btn1_gpio_data == 0) //active low btn[1]
+		{
+			accumulator_prev = accumulator;
+			accumulator += *sw_gpio_data; 
+			if (accumulator_prev > accumulator)
+			{
+				xil_printf("accumulator overflow!\r\n");
+			}
+			xil_printf("accumulator = %u\r\n", accumulator);
+		}
 	}
-
     // cleanup_platform();
-
     return 0;
 }

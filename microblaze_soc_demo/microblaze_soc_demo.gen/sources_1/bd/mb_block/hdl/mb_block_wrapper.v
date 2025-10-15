@@ -2,7 +2,7 @@
 //Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
 //--------------------------------------------------------------------------------
 //Tool Version: Vivado v.2025.1 (win64) Build 6140274 Thu May 22 00:12:29 MDT 2025
-//Date        : Mon Oct 13 20:04:36 2025
+//Date        : Tue Oct 14 18:32:15 2025
 //Host        : alexander-LT running 64-bit major release  (build 9200)
 //Command     : generate_target mb_block_wrapper.bd
 //Design      : mb_block_wrapper
@@ -13,17 +13,23 @@
 module mb_block_wrapper
    (clk_100MHz,
     gpio_rtl_0_tri_o,
+    gpio_rtl_1_tri_i,
+    gpio_rtl_2_tri_i,
     reset_rtl_0,
     uart_rtl_0_rxd,
     uart_rtl_0_txd);
   input clk_100MHz;
   output [0:0]gpio_rtl_0_tri_o;
+  input [15:0]gpio_rtl_1_tri_i;
+  input [0:0]gpio_rtl_2_tri_i;
   input reset_rtl_0;
   input uart_rtl_0_rxd;
   output uart_rtl_0_txd;
 
   wire clk_100MHz;
   wire [0:0]gpio_rtl_0_tri_o;
+  wire [15:0]gpio_rtl_1_tri_i;
+  wire [0:0]gpio_rtl_2_tri_i;
   wire reset_rtl_0;
   wire uart_rtl_0_rxd;
   wire uart_rtl_0_txd;
@@ -31,6 +37,8 @@ module mb_block_wrapper
   mb_block mb_block_i
        (.clk_100MHz(clk_100MHz),
         .gpio_rtl_0_tri_o(gpio_rtl_0_tri_o),
+        .gpio_rtl_1_tri_i(gpio_rtl_1_tri_i),
+        .gpio_rtl_2_tri_i(gpio_rtl_2_tri_i),
         .reset_rtl_0(reset_rtl_0),
         .uart_rtl_0_rxd(uart_rtl_0_rxd),
         .uart_rtl_0_txd(uart_rtl_0_txd));
