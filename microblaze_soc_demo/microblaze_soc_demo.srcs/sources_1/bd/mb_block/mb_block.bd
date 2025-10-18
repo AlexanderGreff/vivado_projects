@@ -1,7 +1,7 @@
 {
   "design": {
     "design_info": {
-      "boundary_crc": "0xE3E2D869A152BB8C",
+      "boundary_crc": "0x56194698863BE00C",
       "device": "xc7s50csga324-1",
       "gen_directory": "../../../../microblaze_soc_demo.gen/sources_1/bd/mb_block",
       "name": "mb_block",
@@ -46,7 +46,7 @@
           "TRI_O": {
             "physical_name": "gpio_rtl_0_tri_o",
             "direction": "O",
-            "left": "0",
+            "left": "15",
             "right": "0"
           }
         }
@@ -1222,7 +1222,7 @@
             "value": "1"
           },
           "C_GPIO_WIDTH": {
-            "value": "1"
+            "value": "16"
           }
         }
       },

@@ -36,6 +36,7 @@ int main()
 		{
 			accumulator_prev = accumulator;
 			accumulator += *sw_gpio_data; 
+			*led_gpio_data = accumulator;
 			if (accumulator_prev > accumulator)
 			{
 				xil_printf("accumulator overflow!\r\n");

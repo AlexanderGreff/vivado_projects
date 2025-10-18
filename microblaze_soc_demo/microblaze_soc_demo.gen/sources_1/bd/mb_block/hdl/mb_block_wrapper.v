@@ -2,7 +2,7 @@
 //Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
 //--------------------------------------------------------------------------------
 //Tool Version: Vivado v.2025.1 (win64) Build 6140274 Thu May 22 00:12:29 MDT 2025
-//Date        : Tue Oct 14 18:32:15 2025
+//Date        : Fri Oct 17 13:11:53 2025
 //Host        : alexander-LT running 64-bit major release  (build 9200)
 //Command     : generate_target mb_block_wrapper.bd
 //Design      : mb_block_wrapper
@@ -19,7 +19,7 @@ module mb_block_wrapper
     uart_rtl_0_rxd,
     uart_rtl_0_txd);
   input clk_100MHz;
-  output [0:0]gpio_rtl_0_tri_o;
+  output [15:0]gpio_rtl_0_tri_o;
   input [15:0]gpio_rtl_1_tri_i;
   input [0:0]gpio_rtl_2_tri_i;
   input reset_rtl_0;
@@ -27,7 +27,7 @@ module mb_block_wrapper
   output uart_rtl_0_txd;
 
   wire clk_100MHz;
-  wire [0:0]gpio_rtl_0_tri_o;
+  wire [15:0]gpio_rtl_0_tri_o;
   wire [15:0]gpio_rtl_1_tri_i;
   wire [0:0]gpio_rtl_2_tri_i;
   wire reset_rtl_0;

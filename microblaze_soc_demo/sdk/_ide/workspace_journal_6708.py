@@ -1,18 +1,16 @@
-# 2025-10-17T13:46:13.132479500
+# 2025-10-15T18:27:46.214807800
 import vitis
 
 client = vitis.create_client()
 client.set_workspace(path="sdk")
 
 platform = client.get_component(name="blinky")
-status = platform.update_hw(hw_design = "$COMPONENT_LOCATION/../../mb_intro_top.xsa")
-
-status = platform.build()
-
 status = platform.build()
 
 comp = client.get_component(name="mb_blink_app")
 comp.build()
+
+vitis.dispose()
 
 vitis.dispose()
 

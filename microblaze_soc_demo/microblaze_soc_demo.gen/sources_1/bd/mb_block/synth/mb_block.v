@@ -2,7 +2,7 @@
 //Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
 //--------------------------------------------------------------------------------
 //Tool Version: Vivado v.2025.1 (win64) Build 6140274 Thu May 22 00:12:29 MDT 2025
-//Date        : Tue Oct 14 18:32:15 2025
+//Date        : Fri Oct 17 13:11:53 2025
 //Host        : alexander-LT running 64-bit major release  (build 9200)
 //Command     : generate_target mb_block.bd
 //Design      : mb_block
@@ -595,7 +595,7 @@ module mb_block
     uart_rtl_0_rxd,
     uart_rtl_0_txd);
   (* X_INTERFACE_INFO = "xilinx.com:signal:clock:1.0 CLK.CLK_100MHZ CLK" *) (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME CLK.CLK_100MHZ, CLK_DOMAIN mb_block_clk_100MHz, FREQ_HZ 100000000, FREQ_TOLERANCE_HZ 0, INSERT_VIP 0, PHASE 0.0" *) input clk_100MHz;
-  (* X_INTERFACE_INFO = "xilinx.com:interface:gpio:1.0 gpio_rtl_0 TRI_O" *) (* X_INTERFACE_MODE = "Master" *) output [0:0]gpio_rtl_0_tri_o;
+  (* X_INTERFACE_INFO = "xilinx.com:interface:gpio:1.0 gpio_rtl_0 TRI_O" *) (* X_INTERFACE_MODE = "Master" *) output [15:0]gpio_rtl_0_tri_o;
   (* X_INTERFACE_INFO = "xilinx.com:interface:gpio:1.0 gpio_rtl_1 TRI_I" *) (* X_INTERFACE_MODE = "Master" *) input [15:0]gpio_rtl_1_tri_i;
   (* X_INTERFACE_INFO = "xilinx.com:interface:gpio:1.0 gpio_rtl_2 TRI_I" *) (* X_INTERFACE_MODE = "Master" *) input [0:0]gpio_rtl_2_tri_i;
   (* X_INTERFACE_INFO = "xilinx.com:signal:reset:1.0 RST.RESET_RTL_0 RST" *) (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME RST.RESET_RTL_0, INSERT_VIP 0, POLARITY ACTIVE_LOW" *) input reset_rtl_0;
@@ -605,7 +605,7 @@ module mb_block
   wire axi_uartlite_0_interrupt;
   wire clk_100MHz;
   wire clk_wiz_1_locked;
-  wire [0:0]gpio_rtl_0_tri_o;
+  wire [15:0]gpio_rtl_0_tri_o;
   wire [15:0]gpio_rtl_1_tri_i;
   wire [0:0]gpio_rtl_2_tri_i;
   wire mdm_1_debug_sys_rst;

@@ -19,7 +19,7 @@ module mb_intro_top
 
   mb_block mb_block_i
        (.clk_100MHz(clk),
-        .gpio_rtl_0_tri_o(led[0]),
+        .gpio_rtl_0_tri_o(led),
         .gpio_rtl_1_tri_i(sw),
         .gpio_rtl_2_tri_i(~btn[1]),
         .reset_rtl_0(~btn[0]),      //Note the inversion of the reset button. Buttons are active low, but the MicroBlaze reset is active high
